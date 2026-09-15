@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useHLSVideo } from '../hooks/useHLSVideo';
 import { personalInfo } from '../data/socials';
-import { ArrowUpRight, Mail } from 'lucide-react';
+import { MagneticButton } from './MagneticButton';
 import { GithubIcon, LinkedinIcon } from './icons';
+import { ArrowRight, Mail } from 'lucide-react';
 
 const HLS_SOURCE = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
@@ -18,16 +19,14 @@ export function Hero({ onExploreWork, onConnect }: HeroProps) {
 
   const [roleIndex, setRoleIndex] = useState(0);
 
-  // Rotating roles every 2 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % personalInfo.rotatingRoles.length);
-    }, 2000);
+    }, 2200);
 
     return () => clearInterval(timer);
   }, []);
 
-  // GSAP Hero Entrance Timeline
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -35,16 +34,16 @@ export function Hero({ onExploreWork, onConnect }: HeroProps) {
       });
 
       tl.fromTo(
-        '.name-reveal',
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1.2, delay: 0.1 }
+        '.name-reveal-title',
+        { opacity: 0, y: 60, skewY: 2 },
+        { opacity: 1, y: 0, skewY: 0, duration: 1.3, delay: 0.1 }
       );
 
       tl.fromTo(
-        '.blur-in',
-        { opacity: 0, filter: 'blur(10px)', y: 20 },
-        { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1, stagger: 0.1 },
-        0.3
+        '.blur-in-element',
+        { opacity: 0, filter: 'blur(12px)', y: 25 },
+        { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1.1, stagger: 0.12 },
+        0.35
       );
     }, containerRef);
 
@@ -57,111 +56,126 @@ export function Hero({ onExploreWork, onConnect }: HeroProps) {
     <section
       id="home"
       ref={containerRef}
-      className="min-h-screen relative overflow-hidden flex flex-col justify-between items-center pt-28 md:pt-36 pb-12 px-6 md:px-12 text-center select-none"
+      className="min-h-screen relative overflow-hidden flex flex-col justify-between pt-28 md:pt-36 pb-12 px-6 md:px-12 lg:px-20 select-none cinematic-vignette"
     >
-      {/* Background HLS Video */}
+      {/* Background Cinematic HLS Video */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover opacity-60 filter brightness-90 contrast-110"
+          className="absolute inset-0 w-full h-full object-cover opacity-50 filter brightness-90 contrast-110"
           playsInline
           muted
           loop
           autoPlay
         />
-        {/* Dark overlay for perfect contrast */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px]" />
-        {/* Bottom smooth fade to section background */}
-        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent pointer-events-none" />
+
+        {/* Technical grid backdrop */}
+        <div className="absolute inset-0 technical-grid opacity-30 pointer-events-none" />
+
+        {/* Subtle Radial Glow directly behind typography */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(78,133,191,0.12)_0%,transparent_70%)] pointer-events-none blur-2xl" />
+
+        {/* Subtle dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/70 via-[#080808]/40 to-[#080808]" />
       </div>
 
-      {/* Hero Content (Centered) */}
-      <div className="relative z-10 my-auto flex flex-col items-center max-w-4xl mx-auto w-full">
-        {/* Eyebrow */}
-        <div className="blur-in text-xs text-muted uppercase tracking-[0.3em] mb-6 md:mb-8 font-medium flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#89AACC]" />
-          {personalInfo.eyebrow}
+      {/* Asymmetric Hero Content */}
+      <div className="relative z-10 my-auto max-w-7xl mx-auto w-full flex flex-col items-start text-left pt-6">
+        {/* Top Eyebrow & Metadata Line */}
+        <div className="blur-in-element flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-[0.3em] text-muted mb-6 md:mb-8">
+          <span className="text-[#89AACC] font-semibold">{personalInfo.eyebrow}</span>
+          <span className="w-12 h-[1px] bg-white/20 hidden sm:inline-block" />
+          <div className="flex items-center gap-2 text-[11px] text-muted/80">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>BENGALURU, INDIA</span>
+          </div>
         </div>
 
-        {/* Main Name: Kishor S V */}
-        <h1 className="name-reveal text-7xl sm:text-8xl md:text-9xl font-display italic leading-[0.9] tracking-tight text-text-primary mb-6 md:mb-8 hover:tracking-normal transition-all duration-500">
-          {personalInfo.name}
-        </h1>
-
-        {/* Primary Role & Rotating Ticker */}
-        <div className="blur-in text-base sm:text-lg md:text-xl text-text-primary/90 font-light mb-4 max-w-2xl px-4 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
-          <span className="font-medium text-text-primary">
-            {personalInfo.primaryRole}
-          </span>
-          <span className="text-muted/60">•</span>
-          <span
-            key={currentRole}
-            className="animate-role-fade-in font-display italic text-[#89AACC] font-medium text-lg sm:text-xl md:text-2xl px-1 inline-block"
-          >
-            {currentRole}
-          </span>
+        {/* Enormous Asymmetric Name: Kishor SV with Instrument Serif Italic */}
+        <div className="name-reveal-title mb-6 md:mb-8">
+          <h1 className="hero-clamp font-light tracking-tighter text-text-primary">
+            Kishor{' '}
+            <span className="font-display italic text-[#89AACC] font-normal inline-block ml-1">
+              S V
+            </span>
+          </h1>
         </div>
 
-        {/* Exact Short Line */}
-        <p className="blur-in text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed mb-10 px-4 font-light">
+        {/* Floating Technical Label & Extended Line */}
+        <div className="blur-in-element flex items-center gap-4 w-full mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-text-primary tracking-wider uppercase backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#89AACC]" />
+            <span>AI / FULL-STACK</span>
+          </div>
+
+          <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent hidden md:block" />
+
+          {/* Dynamic rotating role ticker */}
+          <div className="text-xs sm:text-sm font-mono text-muted/90 flex items-center gap-2">
+            <span>Specializing in</span>
+            <span
+              key={currentRole}
+              className="animate-role-fade-in text-text-primary font-semibold text-xs sm:text-sm px-2 py-0.5 rounded bg-white/5 border border-white/10 font-mono"
+            >
+              {currentRole}
+            </span>
+          </div>
+        </div>
+
+        {/* Short Line Copy */}
+        <p className="blur-in-element text-base sm:text-lg md:text-xl text-muted/90 max-w-2xl leading-relaxed mb-10 font-light">
           "{personalInfo.shortTagline}"
         </p>
 
-        {/* 4 Hero Action Buttons: View Projects · GitHub · LinkedIn · Contact */}
-        <div className="blur-in flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
-          {/* 1. View Projects */}
-          <button
-            onClick={onExploreWork}
-            className="rounded-full px-6 py-3 text-xs sm:text-sm font-semibold bg-text-primary text-bg hover:scale-105 active:scale-95 transition-transform duration-200 shadow-xl shadow-white/5 flex items-center justify-center gap-2"
-          >
+        {/* Magnetic Button Action System */}
+        <div className="blur-in-element flex flex-wrap items-center gap-4">
+          {/* Primary Magnetic CTA */}
+          <MagneticButton onClick={onExploreWork} variant="primary">
             <span>View Projects</span>
-            <span className="text-xs">↗</span>
-          </button>
+            <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+          </MagneticButton>
 
-          {/* 2. GitHub */}
-          <a
+          {/* Secondary Magnetic Button: GitHub */}
+          <MagneticButton
             href="https://github.com/kishorsv"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full px-5 py-3 text-xs sm:text-sm font-medium border border-stroke bg-bg/80 hover:bg-surface hover:border-white/30 text-text-primary hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2"
+            variant="secondary"
           >
-            <GithubIcon size={15} />
+            <GithubIcon size={14} />
             <span>GitHub</span>
-          </a>
+          </MagneticButton>
 
-          {/* 3. LinkedIn */}
-          <a
+          {/* Secondary Magnetic Button: LinkedIn */}
+          <MagneticButton
             href="https://linkedin.com/in/kishorsv"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full px-5 py-3 text-xs sm:text-sm font-medium border border-stroke bg-bg/80 hover:bg-surface hover:border-white/30 text-text-primary hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2"
+            variant="secondary"
           >
-            <LinkedinIcon size={15} className="text-[#89AACC]" />
+            <LinkedinIcon size={14} className="text-[#89AACC]" />
             <span>LinkedIn</span>
-          </a>
+          </MagneticButton>
 
-          {/* 4. Contact */}
-          <button
-            onClick={onConnect}
-            className="group relative rounded-full p-[1.5px] hover:scale-105 active:scale-95 transition-transform duration-200"
-          >
-            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#89AACC] to-[#4E85BF] opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-shift" />
-            <span className="relative block rounded-full border border-stroke bg-bg px-6 py-2.5 text-xs sm:text-sm font-medium text-text-primary group-hover:border-transparent transition-colors flex items-center justify-center gap-2">
-              <Mail size={15} className="text-[#89AACC]" />
-              <span>Contact</span>
-              <ArrowUpRight size={13} className="text-muted group-hover:text-text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </span>
-          </button>
+          {/* Secondary Magnetic Button: Contact */}
+          <MagneticButton onClick={onConnect} variant="secondary">
+            <Mail size={14} className="text-[#89AACC]" />
+            <span>Let's Talk</span>
+          </MagneticButton>
         </div>
       </div>
 
-      {/* Scroll Indicator (Bottom Center) */}
-      <div className="relative z-10 flex flex-col items-center gap-3 mt-8">
-        <span className="text-[11px] text-muted uppercase tracking-[0.2em] font-medium">
-          SCROLL
-        </span>
-        <div className="w-px h-10 bg-stroke relative overflow-hidden">
-          <div className="w-full h-1/2 accent-gradient animate-scroll-down absolute left-0" />
+      {/* Editorial Scroll Indicator at Bottom */}
+      <div className="relative z-10 flex items-center justify-between w-full max-w-7xl mx-auto pt-8 border-t border-white/5 text-[11px] font-mono text-muted/70 uppercase tracking-[0.25em]">
+        <div className="flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-[#89AACC] animate-ping" />
+          <span>SCROLL TO EXPLORE</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span>PORTFOLIO COLLECTION</span>
+          <span className="w-12 h-px bg-white/20 hidden sm:block" />
+          <span className="text-text-primary">2026</span>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, GitFork, Star, ArrowUpRight, BookOpen, Code2 } from 'lucide-react';
+import { SectionDivider } from './SectionDivider';
 import { GithubIcon } from './icons';
+import { GraduationCap, GitFork, Star, ArrowUpRight, BookOpen, Code2 } from 'lucide-react';
 
 export function EducationAndGithub() {
   const learningAreas = [
@@ -8,8 +9,8 @@ export function EducationAndGithub() {
     'Machine Learning Foundations',
     'Linear Algebra & Calculus',
     'Database Management Systems',
-    'Computer Networks & HTTP/WS',
-    'Object-Oriented Architecture',
+    'Computer Networks & Protocols',
+    'Software Engineering Principles',
   ];
 
   const repos = [
@@ -51,7 +52,6 @@ export function EducationAndGithub() {
     },
   ];
 
-  // Deterministic heatmap pattern for client-side rendering (100% reliable, zero broken embeds)
   const heatmapCols = 32;
   const heatmapRows = 7;
   const generateLevel = (col: number, row: number) => {
@@ -63,15 +63,18 @@ export function EducationAndGithub() {
   };
 
   const levelColors = [
-    'bg-surface/60',
+    'bg-white/5',
     'bg-[#4E85BF]/30',
     'bg-[#4E85BF]/60',
     'bg-[#89AACC]',
   ];
 
   return (
-    <section id="education" className="bg-bg py-20 md:py-32 relative overflow-hidden border-t border-stroke/50">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16">
+    <section id="education" className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
+      {/* Editorial Section Divider */}
+      <SectionDivider number="09" label="ACADEMICS & GITHUB VELOCITY" />
+
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,23 +83,18 @@ export function EducationAndGithub() {
           transition={{ duration: 0.8 }}
           className="mb-14"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-8 h-px bg-[#89AACC]" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted font-medium">
-              Academic & Developer Footprint
-            </span>
-          </div>
-
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans tracking-tight text-text-primary">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-3 block">
+            Academic & Developer Footprint
+          </span>
+          <h2 className="heading-clamp font-light tracking-tight text-text-primary">
             Education & <span className="font-display italic text-[#89AACC]">activity</span>
           </h2>
-
-          <p className="text-sm md:text-base text-muted max-w-xl mt-3 leading-relaxed">
+          <p className="text-sm md:text-base text-muted max-w-xl mt-3 leading-relaxed font-light">
             Formal engineering grounding paired with consistent daily GitHub open-source code commits and development velocity.
           </p>
         </motion.div>
 
-        {/* 2 Main Columns: Left = Education, Right = GitHub Activity */}
+        {/* 2 Main Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Column: Education Card (5 cols) */}
           <motion.div
@@ -104,14 +102,18 @@ export function EducationAndGithub() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 p-7 sm:p-8 rounded-3xl bg-surface/50 border border-stroke flex flex-col justify-between"
+            className="lg:col-span-5 p-8 sm:p-9 rounded-3xl border border-white/10 flex flex-col justify-between"
+            style={{
+              background: 'rgba(255, 255, 255, 0.02)',
+              backdropFilter: 'blur(16px)',
+            }}
           >
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-bg border border-stroke flex items-center justify-center text-[#89AACC]">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#89AACC]">
                   <GraduationCap size={24} />
                 </div>
-                <span className="text-xs font-mono text-[#89AACC] px-3 py-1 rounded-full bg-bg border border-stroke">
+                <span className="text-xs font-mono text-[#89AACC] px-3 py-1 rounded-full bg-white/5 border border-white/10">
                   2022 — 2026
                 </span>
               </div>
@@ -140,7 +142,7 @@ export function EducationAndGithub() {
                   {learningAreas.map((area) => (
                     <div
                       key={area}
-                      className="p-2.5 rounded-xl bg-bg/60 border border-stroke/70 text-xs text-text-primary/90 font-mono flex items-center gap-2"
+                      className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-xs text-text-primary/90 font-mono flex items-center gap-2"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-[#4E85BF] shrink-0" />
                       <span className="truncate">{area}</span>
@@ -150,7 +152,7 @@ export function EducationAndGithub() {
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-stroke/50 flex items-center justify-between text-xs text-muted font-mono">
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-muted font-mono">
               <span>Status: Active Enrolled</span>
               <span className="text-emerald-400">Good Academic Standing</span>
             </div>
@@ -162,13 +164,17 @@ export function EducationAndGithub() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="lg:col-span-7 p-7 sm:p-8 rounded-3xl bg-surface/50 border border-stroke flex flex-col justify-between"
+            className="lg:col-span-7 p-8 sm:p-9 rounded-3xl border border-white/10 flex flex-col justify-between"
+            style={{
+              background: 'rgba(255, 255, 255, 0.02)',
+              backdropFilter: 'blur(16px)',
+            }}
           >
             <div>
               {/* GitHub Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-bg border border-stroke flex items-center justify-center text-text-primary">
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-text-primary">
                     <GithubIcon size={24} />
                   </div>
                   <div>
@@ -186,20 +192,21 @@ export function EducationAndGithub() {
                   href="https://github.com/kishorsv"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-stroke bg-bg hover:border-white/30 text-xs font-mono text-text-primary transition-colors self-start sm:self-auto group"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 hover:border-white/30 text-xs font-mono text-text-primary transition-colors self-start sm:self-auto group"
+                  data-cursor="link"
                 >
                   <span>View GitHub Profile</span>
                   <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
 
-              {/* Robust Client-Side Contribution Graph (Never Breaks) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-bg/80 border border-stroke mb-6 overflow-hidden">
+              {/* Reliable Client-Side Contribution Graph */}
+              <div className="p-5 rounded-2xl bg-black/40 border border-white/10 mb-6 overflow-hidden">
                 <div className="flex items-center justify-between mb-3 text-xs font-mono text-muted">
                   <span>Contribution Velocity</span>
                   <div className="flex items-center gap-1.5 text-[10px]">
                     <span>Less</span>
-                    <span className="w-2.5 h-2.5 rounded-sm bg-surface/60 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-sm bg-white/5 inline-block" />
                     <span className="w-2.5 h-2.5 rounded-sm bg-[#4E85BF]/30 inline-block" />
                     <span className="w-2.5 h-2.5 rounded-sm bg-[#4E85BF]/60 inline-block" />
                     <span className="w-2.5 h-2.5 rounded-sm bg-[#89AACC] inline-block" />
@@ -207,7 +214,6 @@ export function EducationAndGithub() {
                   </div>
                 </div>
 
-                {/* Grid */}
                 <div className="grid grid-flow-col gap-1 overflow-x-auto pb-1 custom-scrollbar">
                   {Array.from({ length: heatmapCols }).map((_, cIdx) => (
                     <div key={cIdx} className="grid grid-rows-7 gap-1">
@@ -226,7 +232,7 @@ export function EducationAndGithub() {
                 </div>
               </div>
 
-              {/* Public Repos Mini Showcase */}
+              {/* Public Repos Showcase */}
               <div>
                 <span className="text-xs font-mono uppercase tracking-wider text-muted block mb-3 flex items-center gap-1.5">
                   <Code2 size={13} className="text-[#89AACC]" />
@@ -239,7 +245,8 @@ export function EducationAndGithub() {
                       href={repo.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-bg/50 border border-stroke/70 hover:border-white/20 transition-all block group/repo"
+                      className="p-4 rounded-xl bg-black/30 border border-white/10 hover:border-white/25 transition-all block group/repo"
+                      data-cursor="link"
                     >
                       <div className="flex items-center justify-between text-xs font-mono mb-1">
                         <span className="font-semibold text-text-primary group-hover/repo:text-[#89AACC] transition-colors truncate">
@@ -247,7 +254,7 @@ export function EducationAndGithub() {
                         </span>
                         <ArrowUpRight size={12} className="text-muted group-hover/repo:text-text-primary" />
                       </div>
-                      <p className="text-[11px] text-muted line-clamp-2 mb-2 font-light leading-snug">
+                      <p className="text-[11px] text-muted line-clamp-2 mb-3 font-light leading-snug">
                         {repo.desc}
                       </p>
                       <div className="flex items-center gap-3 text-[10px] font-mono text-muted/70">

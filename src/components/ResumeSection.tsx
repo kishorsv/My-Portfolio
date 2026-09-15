@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/socials';
-import { FileText, Download, CheckCircle2, Eye } from 'lucide-react';
+import { SectionDivider } from './SectionDivider';
+import { MagneticButton } from './MagneticButton';
+import { FileText, Download, CheckCircle2, Eye, ArrowRight } from 'lucide-react';
 
 interface ResumeSectionProps {
   onOpenResume: () => void;
@@ -17,35 +19,39 @@ export function ResumeSection({ onOpenResume }: ResumeSectionProps) {
   ];
 
   return (
-    <section id="resume" className="bg-bg py-20 md:py-32 relative overflow-hidden border-t border-stroke/50">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16">
+    <section id="resume" className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
+      {/* Editorial Section Divider */}
+      <SectionDivider number="10" label="CURRICULUM VITAE" />
+
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
         {/* Banner Box */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-3xl bg-surface border border-stroke p-8 sm:p-12 md:p-16 overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-10"
+          className="relative rounded-[36px] border border-white/10 p-8 sm:p-12 md:p-16 overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-10"
+          style={{
+            background: 'rgba(255, 255, 255, 0.02)',
+            backdropFilter: 'blur(20px)',
+          }}
         >
           {/* Subtle Ambient Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#142332]/40 via-[#0e1722]/30 to-[#080d14]/40 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#142332]/30 via-[#0e1722]/20 to-[#080d14]/30 pointer-events-none" />
           <div className="absolute inset-0 halftone-overlay pointer-events-none" />
 
           {/* Left: Headline & Information */}
           <div className="relative z-10 max-w-2xl">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#89AACC]" />
-              <span className="text-xs uppercase tracking-[0.3em] text-muted font-medium">
-                Curriculum Vitae
-              </span>
-            </div>
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-4 block">
+              Formal Qualifications
+            </span>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans tracking-tight text-text-primary mb-4 leading-tight">
+            <h2 className="heading-clamp font-light tracking-tight text-text-primary mb-4 leading-tight">
               Looking for full details?{' '}
               <span className="font-display italic text-[#89AACC]">Inspect the resume.</span>
             </h2>
 
-            <p className="text-sm sm:text-base text-muted leading-relaxed mb-8 font-light">
+            <p className="text-sm sm:text-base text-muted/90 leading-relaxed mb-8 font-light">
               Comprehensive overview mapping coursework, software engineering proficiencies, agentic projects, and verified credentials in one structured document.
             </p>
 
@@ -54,7 +60,7 @@ export function ResumeSection({ onOpenResume }: ResumeSectionProps) {
               {resumeSections.map((sec) => (
                 <div
                   key={sec.title}
-                  className="flex items-start gap-2.5 text-xs text-muted/90 p-2.5 rounded-xl bg-bg/60 border border-stroke/60 font-mono"
+                  className="flex items-start gap-2.5 text-xs text-muted/90 p-3 rounded-2xl bg-black/40 border border-white/10 font-mono"
                 >
                   <CheckCircle2 size={14} className="text-[#89AACC] shrink-0 mt-0.5" />
                   <div>
@@ -69,23 +75,20 @@ export function ResumeSection({ onOpenResume }: ResumeSectionProps) {
           {/* Right: Actions */}
           <div className="relative z-10 flex flex-col items-center sm:items-start lg:items-end gap-4 shrink-0">
             {/* Primary Action Button */}
-            <button
-              onClick={onOpenResume}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full accent-gradient text-bg font-semibold text-sm hover:opacity-90 transition-all shadow-xl shadow-[#4E85BF]/20 hover:scale-105 active:scale-95"
-            >
-              <Eye size={16} />
-              <span>Preview & Inspect Resume</span>
-              <span>→</span>
-            </button>
+            <MagneticButton onClick={onOpenResume} variant="primary">
+              <Eye size={15} />
+              <span>Inspect Resume</span>
+              <ArrowRight size={14} />
+            </MagneticButton>
 
             {/* Download PDF via mailto or direct request */}
-            <a
+            <MagneticButton
               href={`mailto:${personalInfo.email}?subject=Resume Request - Kishor S V`}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-stroke bg-bg/80 hover:border-white/30 text-xs font-mono text-text-primary hover:bg-surface transition-colors"
+              variant="secondary"
             >
               <Download size={14} className="text-[#89AACC]" />
-              <span>Download Resume PDF</span>
-            </a>
+              <span>Download PDF</span>
+            </MagneticButton>
 
             <div className="text-[11px] font-mono text-muted/70 flex items-center gap-1.5 mt-2">
               <FileText size={12} />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoadingScreen } from './components/LoadingScreen';
+import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -7,6 +8,8 @@ import { Skills } from './components/Skills';
 import { SelectedWorks } from './components/SelectedWorks';
 import { WhatIBuild } from './components/WhatIBuild';
 import { EngineeringJourney } from './components/EngineeringJourney';
+import { Journal } from './components/Journal';
+import { JournalModal } from './components/JournalModal';
 import { Certifications } from './components/Certifications';
 import { Achievements } from './components/Achievements';
 import { EducationAndGithub } from './components/EducationAndGithub';
@@ -16,6 +19,7 @@ import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ResumeModal } from './components/ResumeModal';
 import type { FeaturedProject } from './data/projects';
+import type { JournalArticle } from './data/journal';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -24,6 +28,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<FeaturedProject | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<JournalArticle | null>(null);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   // Refresh GSAP ScrollTrigger once loader finishes
@@ -53,7 +58,13 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-bg text-text-primary selection:bg-[#4E85BF]/30 selection:text-white relative">
+    <div className="min-h-screen bg-[#080808] text-text-primary selection:bg-[#4E85BF]/30 selection:text-white relative overflow-x-hidden">
+      {/* Desktop Magnetic Custom Cursor */}
+      <CustomCursor />
+
+      {/* Ambient Film Grain Overlay */}
+      <div className="film-grain-overlay pointer-events-none" />
+
       {/* Full-Screen Loading Experience (000 -> 100, 2700ms) */}
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
 
@@ -63,7 +74,7 @@ export function App() {
         onOpenContact={scrollToContact}
       />
 
-      {/* Main Single-Page Portfolio Experience (Exact Homepage Order) */}
+      {/* Main Single-Page Portfolio Experience */}
       <main id="main-content" className="relative z-10">
         {/* 1. Hero Section */}
         <Hero
@@ -74,10 +85,10 @@ export function App() {
         {/* 2. About Me */}
         <About />
 
-        {/* 3. Tech Stack (Skills) */}
+        {/* 3. Tech Stack (Skills Cloud) */}
         <Skills />
 
-        {/* 4. Featured Projects (Best 7 Builds) */}
+        {/* 4. Featured Projects (7 Best Builds) */}
         <SelectedWorks onSelectProject={(project) => setSelectedProject(project)} />
 
         {/* 5. AI / GenAI Focus (What I Build) */}
@@ -86,29 +97,37 @@ export function App() {
         {/* 6. My Engineering Journey */}
         <EngineeringJourney />
 
-        {/* 7. Certifications 🎓 */}
+        {/* 7. Editorial Journal */}
+        <Journal onSelectArticle={(article) => setSelectedArticle(article)} />
+
+        {/* 8. Certifications 🎓 */}
         <Certifications />
 
-        {/* 8. Achievements */}
+        {/* 9. Achievements */}
         <Achievements />
 
-        {/* 9. Education & Developer Activity (GitHub) */}
+        {/* 10. Education & Developer Activity (GitHub) */}
         <EducationAndGithub />
 
-        {/* 10. Resume Callout */}
+        {/* 11. Resume Callout */}
         <ResumeSection onOpenResume={() => setIsResumeOpen(true)} />
 
-        {/* 11. Contact */}
+        {/* 12. Contact */}
         <Contact />
       </main>
 
-      {/* 12. Footer */}
+      {/* Footer */}
       <Footer />
 
       {/* Interactive Modals */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
+      />
+
+      <JournalModal
+        article={selectedArticle}
+        onClose={() => setSelectedArticle(null)}
       />
 
       <ResumeModal

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useHLSVideo } from '../hooks/useHLSVideo';
 import { personalInfo } from '../data/socials';
-import { Mail, Copy, Check, ArrowUpRight, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './icons';
+import { Mail, Copy, Check, ArrowUpRight, Globe } from 'lucide-react';
 
 const HLS_SOURCE = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
@@ -22,7 +22,7 @@ export function Contact() {
     const ctx = gsap.context(() => {
       gsap.to(marquee, {
         xPercent: -50,
-        duration: 40,
+        duration: 45,
         ease: 'none',
         repeat: -1,
       });
@@ -37,79 +37,84 @@ export function Contact() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const marqueeText = Array(10).fill('BUILDING THE FUTURE • ').join('');
+  const marqueeText = Array(10).fill('AI • DESIGN • CODE • CREATE • BUILD • ').join('');
 
   return (
     <section
       id="contact"
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-between pt-24 pb-16 overflow-hidden select-none border-t border-stroke/50"
+      className="relative min-h-screen flex flex-col justify-between pt-24 pb-16 overflow-hidden select-none cinematic-vignette"
     >
       {/* Background HLS Video Flipped Vertically */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover opacity-50 scale-y-[-1] filter brightness-90 contrast-110"
+          className="absolute inset-0 w-full h-full object-cover opacity-45 scale-y-[-1] filter brightness-90 contrast-110"
           playsInline
           muted
           loop
           autoPlay
         />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/75 backdrop-blur-[1px]" />
-        {/* Top fade from previous section */}
-        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-bg to-transparent pointer-events-none" />
+        {/* Dark overlay & Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-[#080808]/75 to-[#080808]" />
       </div>
 
       {/* GSAP Horizontal Marquee at top of section */}
       <div className="relative z-10 w-full overflow-hidden whitespace-nowrap py-6 border-y border-white/10 mb-12">
         <div
           ref={marqueeRef}
-          className="inline-block font-display italic text-5xl sm:text-6xl md:text-8xl text-text-primary/20 tracking-wider uppercase select-none hover:text-text-primary/40 transition-colors"
+          className="inline-block font-mono text-4xl sm:text-5xl md:text-7xl text-white/10 tracking-[0.2em] uppercase select-none hover:text-white/20 transition-colors"
         >
           {marqueeText}
         </div>
       </div>
 
-      {/* Main Contact Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center my-auto flex flex-col items-center">
-        <div className="text-xs text-muted uppercase tracking-[0.3em] mb-6 font-medium flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#89AACC] animate-pulse" />
-          Get In Touch
+      {/* Main Final Scene Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center my-auto flex flex-col items-center">
+        {/* Available Badge with pulsing green dot */}
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-widest text-text-primary mb-8 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <span>AVAILABLE FOR SELECT PROJECTS & INTERNSHIPS</span>
         </div>
 
-        {/* Exact Heading: Let's build something meaningful. */}
-        <h2 className="text-5xl sm:text-6xl md:text-8xl font-display italic leading-[1] text-text-primary mb-8 tracking-tight">
+        {/* Enormous Final Scene Heading */}
+        <h2 className="heading-clamp font-light text-text-primary mb-8 tracking-tighter leading-[0.92]">
           Let's build
           <br />
-          <span className="text-[#89AACC]">something meaningful.</span>
+          <span className="font-display italic text-[#89AACC] font-normal">
+            something meaningful.
+          </span>
         </h2>
 
-        <p className="text-sm sm:text-base text-muted max-w-xl mb-10 leading-relaxed font-light">
-          Whether you're looking for an ambitious engineering intern, an AI/ML collaborator, or want to build high-impact software, my inbox is always open.
+        <p className="text-base sm:text-lg text-muted/90 max-w-xl mb-12 leading-relaxed font-light">
+          Whether you're looking for an ambitious engineering intern, an AI/ML collaborator, or want to architect high-impact software products together.
         </p>
 
-        {/* Email CTA Button with Animated Gradient Border on Hover */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
+        {/* Oversized Email CTA Button */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
           <a
             href={`mailto:${personalInfo.email}`}
             className="group relative inline-flex items-center justify-center rounded-full p-[2px] transition-transform duration-300 hover:scale-105 active:scale-95 shadow-2xl shadow-[#4E85BF]/20"
+            data-cursor="link"
           >
-            {/* Animated accent gradient border */}
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#89AACC] via-[#4E85BF] to-[#89AACC] opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-shift blur-[1px]" />
-            <span className="relative z-10 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-bg border border-stroke text-sm sm:text-base font-mono text-text-primary group-hover:border-transparent transition-all">
-              <Mail size={16} className="text-[#89AACC]" />
+            <span className="relative z-10 inline-flex items-center gap-3 px-10 py-5 rounded-full bg-[#080808] border border-white/15 text-sm sm:text-base font-mono text-text-primary group-hover:border-transparent transition-all shadow-xl">
+              <Mail size={18} className="text-[#89AACC]" />
               <span>{personalInfo.email}</span>
-              <ArrowUpRight size={16} className="text-muted group-hover:text-text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight size={18} className="text-muted group-hover:text-text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </span>
           </a>
 
           {/* Copy button */}
           <button
             onClick={handleCopyEmail}
-            className="p-4 rounded-full border border-stroke bg-bg/80 hover:border-white/30 text-muted hover:text-text-primary transition-all duration-200"
+            className="p-5 rounded-full border border-white/15 bg-[#080808]/80 hover:border-white/40 text-muted hover:text-text-primary transition-all duration-200"
             title="Copy email to clipboard"
             aria-label="Copy email"
+            data-cursor="link"
           >
             {copied ? <Check size={18} className="text-emerald-400" /> : <Copy size={18} />}
           </button>
@@ -121,11 +126,12 @@ export function Contact() {
           </span>
         )}
 
-        {/* Channel Links: Email · LinkedIn · GitHub · X · Portfolio */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-4 border-t border-stroke/50 max-w-lg w-full">
+        {/* Social Channel Links */}
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-6 border-t border-white/10 max-w-lg w-full">
           <a
             href={`mailto:${personalInfo.email}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            data-cursor="link"
           >
             <Mail size={12} className="text-[#89AACC]" />
             <span>Email</span>
@@ -135,7 +141,8 @@ export function Contact() {
             href="https://linkedin.com/in/kishorsv"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            data-cursor="link"
           >
             <LinkedinIcon size={12} className="text-[#89AACC]" />
             <span>LinkedIn</span>
@@ -145,7 +152,8 @@ export function Contact() {
             href="https://github.com/kishorsv"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            data-cursor="link"
           >
             <GithubIcon size={12} />
             <span>GitHub</span>
@@ -155,7 +163,8 @@ export function Contact() {
             href="https://x.com/kishorsv_"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            data-cursor="link"
           >
             <span>𝕏</span>
             <span>Twitter</span>
@@ -163,7 +172,8 @@ export function Contact() {
 
           <a
             href="#home"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+            data-cursor="link"
           >
             <Globe size={12} className="text-[#89AACC]" />
             <span>Portfolio</span>

@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --bg: 0 0% 4%;
-  --surface: 0 0% 8%;
+  --bg: 0 0% 3.1%; /* #080808 */
+  --surface: 0 0% 6.5%;
   --text: 0 0% 96%;
-  --muted: 0 0% 53%;
+  --muted: 0 0% 50%;
   --stroke: 0 0% 12%;
   --accent: 0 0% 96%;
 
-  --font-body: 'Inter', sans-serif;
-  --font-display: 'Instrument Serif', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Instrument Serif', Georgia, serif;
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--stroke));
+    border-color: rgba(255, 255, 255, 0.08);
     box-sizing: border-box;
   }
 
@@ -24,16 +24,17 @@
     color-scheme: dark;
     scroll-behavior: smooth;
     font-family: var(--font-body);
-    background-color: hsl(var(--bg));
+    background-color: #080808;
     color: hsl(var(--text));
   }
 
   body {
-    background-color: hsl(var(--bg));
+    background-color: #080808;
     color: hsl(var(--text));
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -42,6 +43,47 @@
     background: rgba(78, 133, 191, 0.35);
     color: #ffffff;
   }
+}
+
+/* Ambient Film Grain Overlay */
+.film-grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ambient Technical Grid */
+.technical-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Ambient Soft Vignette */
+.cinematic-vignette {
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.85);
+}
+
+/* Fluid Typography Utilities */
+.hero-clamp {
+  font-size: clamp(4rem, 11vw, 11rem);
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+}
+
+.heading-clamp {
+  font-size: clamp(2.8rem, 6.5vw, 6.5rem);
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.editorial-clamp {
+  font-size: clamp(2.2rem, 4.5vw, 5rem);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
 /* Custom Utilities */
@@ -55,35 +97,48 @@
   -webkit-text-fill-color: transparent;
 }
 
-.accent-border-hover {
-  position: relative;
-  background-clip: padding-box;
-}
-
-.accent-border-hover::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
-  background-size: 200% 200%;
-  animation: gradient-shift 6s ease infinite;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.accent-border-hover:hover::before {
-  opacity: 1;
-}
-
 .halftone-overlay {
   background-image: radial-gradient(circle, #000000 1px, transparent 1px);
   background-size: 4px 4px;
   opacity: 0.2;
 }
 
-/* Keyframe animations */
+/* Light-Traveling Animated Gradient Border */
+.traveling-border {
+  position: relative;
+}
+
+.traveling-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #89AACC, #4E85BF, transparent, #89AACC);
+  background-size: 300% 300%;
+  animation: traveling-gradient 8s linear infinite;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.traveling-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes traveling-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom Keyframe Animations */
 @keyframes scroll-down {
   0% {
     transform: translateY(-100%);
@@ -136,17 +191,26 @@
 
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--bg));
+  background: #080808;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--stroke));
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted));
+  background: rgba(137, 170, 204, 0.4);
+}
+
+/* Desktop Custom Cursor Hide Native on Interactive Elements */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-active a,
+  .custom-cursor-active button,
+  .custom-cursor-active [role="button"] {
+    cursor: none;
+  }
 }
 
 /* Respect reduced motion */
