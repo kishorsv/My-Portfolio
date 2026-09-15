@@ -1,100 +1,112 @@
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/socials';
-import { MapPin, Sparkles, Terminal, Code2 } from 'lucide-react';
+import { Sparkles, Code2, Rocket, Target, MapPin } from 'lucide-react';
 
 export function About() {
-  const techPillars = [
+  const pillars = [
     {
       icon: Sparkles,
-      title: 'AI & Generative Intelligence',
-      skills: ['LangChain', 'FastAPI', 'Vector Embeddings', 'RAG', 'vLLM', 'PyTorch', 'Prompt Harnesses'],
+      title: '2nd-Year Engineering Student',
+      tag: 'Academic Foundation',
+      description:
+        'Currently pursuing a Bachelor of Engineering with a rigorous focus on Artificial Intelligence and Machine Learning in Bengaluru, India.',
     },
     {
       icon: Code2,
-      title: 'Full-Stack Systems',
-      skills: ['React 19', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Redis'],
+      title: 'AI/ML + Full-Stack Synergy',
+      tag: 'Technical Focus',
+      description:
+        'Bridging the gap between cutting-edge AI research and practical web applications—pairing model inference with modern React and FastAPI architectures.',
     },
     {
-      icon: Terminal,
-      title: 'Foundations & Tooling',
-      skills: ['Python', 'DSA', 'Docker', 'Git', 'Linux / Bash', 'System Architecture', 'CI/CD'],
+      icon: Target,
+      title: 'Generative AI & Agentic Workflows',
+      tag: 'Core Passion',
+      description:
+        'Deeply fascinated by LLM reasoning loops, vector memory retrieval (RAG), autonomous agents, and deterministic guardrails for probabilistic systems.',
+    },
+    {
+      icon: Rocket,
+      title: 'Aspiring Professional AI Engineer',
+      tag: 'Long-Term Vision',
+      description:
+        'Driven to build high-scale, dependable digital products that solve real-world problems. Committed to continuous daily learning and disciplined shipping.',
     },
   ];
 
   return (
-    <section id="about" className="bg-bg py-24 md:py-36 relative overflow-hidden">
-      <div className="max-w-[1100px] mx-auto px-6 md:px-12 lg:px-16">
-        {/* Eyebrow */}
+    <section id="about" className="bg-bg py-24 md:py-32 relative overflow-hidden border-t border-stroke/50">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex items-center gap-3 mb-8"
+          className="flex items-center gap-3 mb-6"
         >
           <span className="w-8 h-px bg-[#89AACC]" />
           <span className="text-xs uppercase tracking-[0.3em] text-muted font-medium">
-            Philosophy & Craft
+            About Me
           </span>
         </motion.div>
 
-        {/* Large Editorial Statement */}
+        {/* Lead Editorial Statement */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16 md:mb-24"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-text-primary leading-[1.15] max-w-4xl">
-            I like turning{' '}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans font-light tracking-tight text-text-primary leading-[1.15] max-w-4xl">
+            A 2nd-year engineer passionate about turning{' '}
             <span className="font-display italic text-[#89AACC] font-normal">
-              complex ideas
+              generative AI concepts
             </span>{' '}
-            into simple, useful digital experiences.
+            into dependable, working digital solutions.
           </h2>
 
-          <p className="mt-8 text-base sm:text-lg md:text-xl text-muted max-w-2xl leading-relaxed font-light">
-            {personalInfo.aboutEditorial.subtext}
+          <p className="mt-6 text-base sm:text-lg text-muted max-w-2xl leading-relaxed font-light">
+            I don't just study algorithms in textbooks—I test their limits by building functional software. My journey combines rigorous computer science fundamentals with modern full-stack web engineering and real-time AI agents.
           </p>
 
-          <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-widest text-muted/80 font-mono">
+          <div className="mt-5 flex items-center gap-2 text-xs uppercase tracking-widest text-muted/80 font-mono">
             <MapPin size={14} className="text-[#89AACC]" />
-            <span>Based in {personalInfo.location}</span>
+            <span>{personalInfo.location} • Available for internships & high-impact projects</span>
           </div>
         </motion.div>
 
-        {/* Core Pillars / Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {techPillars.map((pillar, idx) => {
+        {/* 4 Thematic Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="p-6 sm:p-8 rounded-3xl bg-surface/40 border border-stroke hover:border-white/20 transition-all duration-300 flex flex-col justify-between"
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="p-6 sm:p-8 rounded-3xl bg-surface/40 border border-stroke hover:border-white/20 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-2xl bg-bg border border-stroke flex items-center justify-center text-[#89AACC] mb-6">
-                    <Icon size={20} />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-2xl bg-bg border border-stroke flex items-center justify-center text-[#89AACC] group-hover:scale-110 transition-transform">
+                      <Icon size={20} />
+                    </div>
+                    <span className="text-[11px] font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-bg border border-stroke/70 text-muted">
+                      {pillar.tag}
+                    </span>
                   </div>
-                  <h3 className="text-lg font-sans font-medium text-text-primary mb-3">
+
+                  <h3 className="text-xl font-sans font-medium text-text-primary mb-2.5">
                     {pillar.title}
                   </h3>
-                </div>
 
-                <div className="flex flex-wrap gap-1.5 mt-4">
-                  {pillar.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="text-[11px] px-2.5 py-1 rounded-full bg-bg/80 border border-stroke text-muted font-mono"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  <p className="text-xs sm:text-sm text-muted leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
               </motion.div>
             );

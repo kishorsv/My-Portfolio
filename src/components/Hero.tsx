@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useHLSVideo } from '../hooks/useHLSVideo';
 import { personalInfo } from '../data/socials';
+import { ArrowUpRight, Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './icons';
 
 const HLS_SOURCE = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
@@ -81,48 +83,73 @@ export function Hero({ onExploreWork, onConnect }: HeroProps) {
           {personalInfo.eyebrow}
         </div>
 
-        {/* Main Name */}
+        {/* Main Name: Kishor S V */}
         <h1 className="name-reveal text-7xl sm:text-8xl md:text-9xl font-display italic leading-[0.9] tracking-tight text-text-primary mb-6 md:mb-8 hover:tracking-normal transition-all duration-500">
           {personalInfo.name}
         </h1>
 
-        {/* Role Rotating Ticker */}
-        <div className="blur-in text-base sm:text-lg md:text-xl text-text-primary/90 font-light mb-5 max-w-2xl px-4 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
-          <span>An</span>
+        {/* Primary Role & Rotating Ticker */}
+        <div className="blur-in text-base sm:text-lg md:text-xl text-text-primary/90 font-light mb-4 max-w-2xl px-4 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
+          <span className="font-medium text-text-primary">
+            {personalInfo.primaryRole}
+          </span>
+          <span className="text-muted/60">•</span>
           <span
             key={currentRole}
-            className="animate-role-fade-in font-display italic text-[#89AACC] font-medium text-lg sm:text-xl md:text-2xl px-1 border-b border-[#4E85BF]/40 inline-block"
+            className="animate-role-fade-in font-display italic text-[#89AACC] font-medium text-lg sm:text-xl md:text-2xl px-1 inline-block"
           >
             {currentRole}
           </span>
-          <span>builds intelligent experiences in Bengaluru.</span>
         </div>
 
-        {/* Description */}
-        <p className="blur-in text-sm md:text-base text-muted max-w-md mx-auto leading-relaxed mb-10 px-4">
-          {personalInfo.heroStatement}
+        {/* Exact Short Line */}
+        <p className="blur-in text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed mb-10 px-4 font-light">
+          "{personalInfo.shortTagline}"
         </p>
 
-        {/* CTA Buttons */}
-        <div className="blur-in flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center">
+        {/* 4 Hero Action Buttons: View Projects · GitHub · LinkedIn · Contact */}
+        <div className="blur-in flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          {/* 1. View Projects */}
           <button
             onClick={onExploreWork}
-            className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-medium bg-text-primary text-bg hover:scale-105 active:scale-95 transition-transform duration-200 shadow-xl shadow-white/5 flex items-center justify-center gap-2"
+            className="rounded-full px-6 py-3 text-xs sm:text-sm font-semibold bg-text-primary text-bg hover:scale-105 active:scale-95 transition-transform duration-200 shadow-xl shadow-white/5 flex items-center justify-center gap-2"
           >
             <span>View Projects</span>
             <span className="text-xs">↗</span>
           </button>
 
+          {/* 2. GitHub */}
+          <a
+            href="https://github.com/kishorsv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full px-5 py-3 text-xs sm:text-sm font-medium border border-stroke bg-bg/80 hover:bg-surface hover:border-white/30 text-text-primary hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2"
+          >
+            <GithubIcon size={15} />
+            <span>GitHub</span>
+          </a>
+
+          {/* 3. LinkedIn */}
+          <a
+            href="https://linkedin.com/in/kishorsv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full px-5 py-3 text-xs sm:text-sm font-medium border border-stroke bg-bg/80 hover:bg-surface hover:border-white/30 text-text-primary hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2"
+          >
+            <LinkedinIcon size={15} className="text-[#89AACC]" />
+            <span>LinkedIn</span>
+          </a>
+
+          {/* 4. Contact */}
           <button
             onClick={onConnect}
-            className="group relative w-full sm:w-auto rounded-full p-[1.5px] hover:scale-105 active:scale-95 transition-transform duration-200"
+            className="group relative rounded-full p-[1.5px] hover:scale-105 active:scale-95 transition-transform duration-200"
           >
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#89AACC] to-[#4E85BF] opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-shift" />
-            <span className="relative block w-full rounded-full border-2 border-stroke bg-bg px-7 py-3 text-sm font-medium text-text-primary group-hover:border-transparent transition-colors flex items-center justify-center gap-2">
-              <span>Let's Connect</span>
-              <span className="text-xs transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                ↗
-              </span>
+            <span className="relative block rounded-full border border-stroke bg-bg px-6 py-2.5 text-xs sm:text-sm font-medium text-text-primary group-hover:border-transparent transition-colors flex items-center justify-center gap-2">
+              <Mail size={15} className="text-[#89AACC]" />
+              <span>Contact</span>
+              <ArrowUpRight size={13} className="text-muted group-hover:text-text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </span>
           </button>
         </div>

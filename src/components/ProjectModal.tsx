@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Project } from '../data/projects';
-import { X, ExternalLink, CheckCircle2, Cpu, BarChart3, Layers } from 'lucide-react';
+import type { FeaturedProject } from '../data/projects';
+import { X, ExternalLink, AlertCircle, CheckCircle2, TrendingUp, Layers } from 'lucide-react';
 
 interface ProjectModalProps {
-  project: Project | null;
+  project: FeaturedProject | null;
   onClose: () => void;
 }
 
@@ -36,7 +36,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          className="absolute inset-0 bg-black/85 backdrop-blur-md"
         />
 
         {/* Modal Window */}
@@ -62,84 +62,73 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {project.number}
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-stroke" />
-            <span className="text-xs uppercase tracking-[0.25em] text-muted font-medium">
-              {project.category}
+            <span className="text-xs uppercase tracking-[0.25em] text-muted font-mono font-medium">
+              {project.badge}
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display italic text-text-primary mb-4 leading-tight">
-            {project.title}
+          <h2 className="text-3xl sm:text-4xl font-display italic text-text-primary mb-3 leading-tight">
+            {project.name}
           </h2>
 
-          <p className="text-sm sm:text-base text-muted leading-relaxed mb-8">
-            {project.fullDescription}
+          <p className="text-base text-muted leading-relaxed mb-6 font-light">
+            {project.tagline}
           </p>
 
-          {/* Key Metrics */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 p-4 rounded-2xl bg-bg/60 border border-stroke mb-8">
-            {project.metrics.map((metric, idx) => (
-              <div key={idx} className="flex flex-col">
-                <span className="text-xs text-muted font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <BarChart3 size={12} className="text-[#89AACC]" />
-                  {metric.label}
-                </span>
-                <span className="text-lg sm:text-2xl font-display italic font-semibold text-text-primary">
-                  {metric.value}
-                </span>
-              </div>
+          {/* Tech Stack Pills */}
+          <div className="flex flex-wrap gap-2 mb-8 pb-6 border-b border-stroke">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="text-xs px-3 py-1 rounded-full bg-bg border border-stroke text-muted font-mono"
+              >
+                {t}
+              </span>
             ))}
           </div>
 
-          {/* Architecture Breakdown */}
-          <div className="mb-8">
-            <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-text-primary/80 mb-3 flex items-center gap-2">
-              <Cpu size={14} className="text-[#89AACC]" />
-              System Architecture & Stack
-            </h4>
-            <div className="space-y-2">
-              {project.architecture.map((arch, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 rounded-xl bg-bg/40 border border-stroke/60 text-xs sm:text-sm text-muted font-mono flex items-center gap-2"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4E85BF]" />
-                  {arch}
-                </div>
-              ))}
+          {/* Detailed Problem -> Solution -> Result Breakdown */}
+          <div className="space-y-6 mb-8">
+            {/* Problem */}
+            <div className="p-5 rounded-2xl bg-bg/60 border border-amber-300/20">
+              <div className="flex items-center gap-2 text-amber-300 font-mono text-xs uppercase tracking-wider font-semibold mb-2">
+                <AlertCircle size={15} />
+                <span>The Core Problem</span>
+              </div>
+              <p className="text-sm text-text-primary/90 leading-relaxed font-light">
+                {project.problem}
+              </p>
             </div>
-          </div>
 
-          {/* Core Features */}
-          <div className="mb-8">
-            <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-text-primary/80 mb-3 flex items-center gap-2">
-              <Layers size={14} className="text-[#89AACC]" />
-              Key Features & Capabilities
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {project.features.map((feat, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-2.5 text-xs sm:text-sm text-muted/90 p-2.5 rounded-xl bg-bg/20 border border-stroke/40"
-                >
-                  <CheckCircle2 size={15} className="text-[#89AACC] shrink-0 mt-0.5" />
-                  <span>{feat}</span>
-                </div>
-              ))}
+            {/* Solution */}
+            <div className="p-5 rounded-2xl bg-bg/60 border border-[#89AACC]/30">
+              <div className="flex items-center gap-2 text-[#89AACC] font-mono text-xs uppercase tracking-wider font-semibold mb-2">
+                <CheckCircle2 size={15} />
+                <span>Engineered Solution</span>
+              </div>
+              <p className="text-sm text-text-primary/90 leading-relaxed font-light">
+                {project.solution}
+              </p>
+            </div>
+
+            {/* Result */}
+            <div className="p-5 rounded-2xl bg-bg/60 border border-emerald-400/30">
+              <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-wider font-semibold mb-2">
+                <TrendingUp size={15} />
+                <span>Outcome & Tangible Utility</span>
+              </div>
+              <p className="text-sm text-text-primary/90 leading-relaxed font-light">
+                {project.result}
+              </p>
             </div>
           </div>
 
           {/* Action Links */}
-          <div className="pt-4 border-t border-stroke/80 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[11px] px-3 py-1 rounded-full bg-bg border border-stroke text-muted font-mono"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+          <div className="pt-4 border-t border-stroke flex flex-wrap items-center justify-between gap-4">
+            <span className="text-xs font-mono text-muted flex items-center gap-1.5">
+              <Layers size={13} className="text-[#89AACC]" />
+              Production Verified Codebase
+            </span>
 
             <div className="flex items-center gap-3">
               {project.githubUrl && (
@@ -156,15 +145,15 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </a>
               )}
 
-              {project.demoUrl && (
+              {project.liveDemoUrl && (
                 <a
-                  href={project.demoUrl}
+                  href={project.liveDemoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2 rounded-full accent-gradient text-bg text-xs font-semibold hover:opacity-90 transition-opacity"
                 >
                   <ExternalLink size={14} />
-                  <span>Live Project</span>
+                  <span>Live Demo</span>
                 </a>
               )}
             </div>

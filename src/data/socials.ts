@@ -5,41 +5,26 @@ export interface SocialLink {
 }
 
 export const personalInfo = {
-  name: 'Kishor SV',
+  name: 'Kishor S V',
   shortName: 'KS',
-  primaryRole: 'AI/ML Engineering Student & Full-Stack Developer',
+  primaryRole: 'AI/ML Engineer & Full-Stack Developer',
   location: 'Bengaluru, India',
   eyebrow: "COLLECTION '26",
   email: 'kishorsv.work@gmail.com',
-  heroDescription:
-    'Building intelligent digital experiences by combining AI, modern web technologies, thoughtful UI/UX, and real-world problem solving.',
-  heroStatement:
-    'I design and build intelligent digital products where AI, engineering, and thoughtful interaction come together.',
-  aboutEditorial: {
-    lead: 'I like turning complex ideas into simple, useful digital experiences.',
-    highlightWord: 'complex ideas',
-    subtext:
-      'Currently exploring AI, Generative AI, full-stack development, Python, DSA, and modern product design.',
-    pillars: [
-      {
-        title: 'Artificial Intelligence & ML',
-        description:
-          'Deep interest in LLM orchestration, Retrieval-Augmented Generation (RAG), vector similarity search, agentic pipelines, and local edge inference with ONNX and WebAssembly.',
-      },
-      {
-        title: 'Full-Stack Engineering',
-        description:
-          'Building performant, type-safe web systems using React 19, TypeScript, Next.js, Node.js, FastAPI, PostgreSQL, and Redis with clean decoupled architectures.',
-      },
-      {
-        title: 'Human-Centered Interaction',
-        description:
-          'Obsessed with micro-interactions, editorial typography, spatial layouts, Framer Motion choreography, zero-layout-shift streaming interfaces, and tactile design.',
-      },
-    ],
+  shortTagline:
+    'I build AI-powered products and modern full-stack applications that turn ideas into working solutions.',
+  aboutMe: {
+    status: '2nd-Year Engineering Student (AI/ML Specialization)',
+    focus: 'AI/ML & Modern Full-Stack Development',
+    genAiPassion:
+      'Passionate about Generative AI, autonomous agents, and building intelligent LLM workflows that solve non-trivial problems.',
+    philosophy:
+      'I believe in learning by building. Rather than just memorizing theory, I turn complex concepts into production-ready web platforms.',
+    careerGoal:
+      'Dedicated to becoming a high-impact professional AI/ML engineer and software architect building products used by millions.',
   },
   rotatingRoles: [
-    'AI Engineer',
+    'AI/ML Engineer',
     'Full-Stack Developer',
     'GenAI Builder',
     'Problem Solver',

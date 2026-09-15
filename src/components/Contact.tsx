@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useHLSVideo } from '../hooks/useHLSVideo';
 import { personalInfo } from '../data/socials';
-import { Mail, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Mail, Copy, Check, ArrowUpRight, Globe } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './icons';
 
 const HLS_SOURCE = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
@@ -42,7 +43,7 @@ export function Contact() {
     <section
       id="contact"
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-between pt-24 pb-16 overflow-hidden select-none"
+      className="relative min-h-screen flex flex-col justify-between pt-24 pb-16 overflow-hidden select-none border-t border-stroke/50"
     >
       {/* Background HLS Video Flipped Vertically */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -55,7 +56,7 @@ export function Contact() {
           autoPlay
         />
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-black/75 backdrop-blur-[1px]" />
         {/* Top fade from previous section */}
         <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-bg to-transparent pointer-events-none" />
       </div>
@@ -77,19 +78,19 @@ export function Contact() {
           Get In Touch
         </div>
 
-        {/* Large Heading */}
+        {/* Exact Heading: Let's build something meaningful. */}
         <h2 className="text-5xl sm:text-6xl md:text-8xl font-display italic leading-[1] text-text-primary mb-8 tracking-tight">
-          Have an idea?
+          Let's build
           <br />
-          <span className="text-[#89AACC]">Let's build it.</span>
+          <span className="text-[#89AACC]">something meaningful.</span>
         </h2>
 
-        <p className="text-sm sm:text-base text-muted max-w-lg mb-10 leading-relaxed font-light">
-          Whether you have a breakthrough AI concept, an ambitious engineering project, or want to explore collaborative opportunities, my inbox is always open.
+        <p className="text-sm sm:text-base text-muted max-w-xl mb-10 leading-relaxed font-light">
+          Whether you're looking for an ambitious engineering intern, an AI/ML collaborator, or want to build high-impact software, my inbox is always open.
         </p>
 
         {/* Email CTA Button with Animated Gradient Border on Hover */}
-        <div className="flex flex-col sm:flex-row items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
           <a
             href={`mailto:${personalInfo.email}`}
             className="group relative inline-flex items-center justify-center rounded-full p-[2px] transition-transform duration-300 hover:scale-105 active:scale-95 shadow-2xl shadow-[#4E85BF]/20"
@@ -115,14 +116,62 @@ export function Contact() {
         </div>
 
         {copied && (
-          <span className="text-xs text-emerald-400 font-mono mt-3 animate-fade-in">
+          <span className="text-xs text-emerald-400 font-mono mb-6 animate-fade-in">
             Email copied to clipboard!
           </span>
         )}
+
+        {/* Channel Links: Email · LinkedIn · GitHub · X · Portfolio */}
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-4 border-t border-stroke/50 max-w-lg w-full">
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+          >
+            <Mail size={12} className="text-[#89AACC]" />
+            <span>Email</span>
+          </a>
+
+          <a
+            href="https://linkedin.com/in/kishorsv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+          >
+            <LinkedinIcon size={12} className="text-[#89AACC]" />
+            <span>LinkedIn</span>
+          </a>
+
+          <a
+            href="https://github.com/kishorsv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+          >
+            <GithubIcon size={12} />
+            <span>GitHub</span>
+          </a>
+
+          <a
+            href="https://x.com/kishorsv_"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+          >
+            <span>𝕏</span>
+            <span>Twitter</span>
+          </a>
+
+          <a
+            href="#home"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-stroke text-xs font-mono text-muted hover:text-text-primary hover:border-white/30 transition-colors"
+          >
+            <Globe size={12} className="text-[#89AACC]" />
+            <span>Portfolio</span>
+          </a>
+        </div>
       </div>
 
-      {/* Bottom spacer for footer */}
-      <div className="h-8" />
+      <div className="h-4" />
     </section>
   );
 }
