@@ -1,4 +1,4 @@
-# Kishor S V � Personal Portfolio & Engineering Showcase
+# Kishor S V — Personal Portfolio & Engineering Showcase
 
 [![Vite](https://img.shields.io/badge/Vite-8.3.0-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -64,6 +64,9 @@ npm run build
 Generates optimized chunks in `/dist` ready for Vercel, Netlify, or GitHub Pages.
 
 ---
+
+**Live Demo →** https://new-7c63.vercel.app/
+
 
 ## ?? Author
 
