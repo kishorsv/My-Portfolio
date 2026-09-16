@@ -75,21 +75,32 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             </div>
           </div>
 
-          {/* Profile Header */}
-          <div className="mb-8">
-            <h2 className="text-3xl sm:text-4xl font-display italic text-text-primary mb-1">
-              {personalInfo.name}
-            </h2>
-            <p className="text-sm font-mono text-[#89AACC] mb-2">
-              {personalInfo.primaryRole}
-            </p>
-            <div className="flex items-center gap-4 text-xs text-muted font-mono">
-              <span className="flex items-center gap-1">
-                <MapPin size={12} />
-                {personalInfo.location}
-              </span>
-              <span>•</span>
-              <span>{personalInfo.email}</span>
+          {/* Profile Header with Avatar */}
+          <div className="flex items-center gap-5 mb-8">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-white/20 bg-black/40 flex-shrink-0 shadow-lg">
+              <img
+                src="/kishor.jpg"
+                alt={personalInfo.name}
+                className="w-full h-full object-cover object-top filter contrast-[1.04]"
+              />
+              <span className="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-black" />
+            </div>
+
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-display italic text-text-primary mb-1">
+                {personalInfo.name}
+              </h2>
+              <p className="text-xs sm:text-sm font-mono text-[#89AACC] mb-1.5">
+                {personalInfo.primaryRole}
+              </p>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-muted font-mono">
+                <span className="flex items-center gap-1">
+                  <MapPin size={12} className="text-[#89AACC]" />
+                  {personalInfo.location}
+                </span>
+                <span>•</span>
+                <span>{personalInfo.email}</span>
+              </div>
             </div>
           </div>
 

@@ -59,6 +59,21 @@ export function About() {
           <p className="mt-8 text-base sm:text-lg md:text-xl text-muted/90 max-w-2xl font-light leading-relaxed">
             {personalInfo.aboutMe.philosophy} Combining continuous daily experimentation, software craft, and mathematical discipline to build dependable software.
           </p>
+
+          {/* Author Byline */}
+          <div className="flex items-center gap-3.5 mt-8 pt-6 border-t border-white/10 max-w-md">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 bg-white/5 flex-shrink-0">
+              <img
+                src="/kishor.jpg"
+                alt="Kishor S V"
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div>
+              <div className="text-sm font-medium text-text-primary tracking-wide">Kishor S V</div>
+              <div className="text-xs font-mono text-muted">AI/ML Engineer & Full-Stack Developer • Bengaluru</div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Asymmetrical 3-Column Narrative Bento */}
