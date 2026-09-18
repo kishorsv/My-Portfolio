@@ -54,20 +54,20 @@ export function MagneticButton({
         <div
           className={`group relative inline-flex items-center justify-center rounded-full p-[1.5px] transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98] ${className}`}
         >
-          {/* Animated Gradient Traveling Border */}
-          <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#89AACC] via-[#4E85BF] to-[#89AACC] opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-shift blur-[0.5px]" />
+          {/* Animated Signature Gradient Border on Hover */}
+          <span className="absolute inset-0 rounded-full signature-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-[0.5px]" />
           
-          {/* Inner Button Pill with Subtle Depth & Highlight */}
-          <span className="relative z-10 inline-flex items-center gap-2 rounded-full bg-text-primary px-7 py-3.5 text-xs sm:text-sm font-semibold text-bg shadow-xl transition-all group-hover:bg-white group-hover:shadow-[0_0_20px_rgba(137,170,204,0.3)]">
+          {/* Inner Button Pill: Ivory background, dark text */}
+          <span className="relative z-10 inline-flex items-center gap-2 rounded-full bg-[#F4F1EA] px-7 py-3.5 text-xs sm:text-sm font-semibold text-[#0A0A0B] shadow-xl transition-all group-hover:bg-[#FFFFFF] group-hover:shadow-[0_0_24px_rgba(124,92,255,0.25)] font-mono uppercase tracking-wider">
             {children}
           </span>
         </div>
       ) : (
         <div
-          className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-white/15 bg-transparent px-7 py-3.5 text-xs sm:text-sm font-medium text-text-primary transition-all duration-300 hover:border-white/40 hover:scale-[1.03] active:scale-[0.98] ${className}`}
+          className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-white/15 bg-transparent px-7 py-3.5 text-xs sm:text-sm font-medium text-[#F4F1EA] transition-all duration-300 hover:border-white/40 hover:scale-[1.03] active:scale-[0.98] font-mono uppercase tracking-wider ${className}`}
         >
-          {/* Background Sweep on Hover */}
-          <span className="absolute inset-0 translate-y-full rounded-full bg-white/10 transition-transform duration-300 ease-out group-hover:translate-y-0" />
+          {/* Background Sweep on Hover: Soft Ivory */}
+          <span className="absolute inset-0 translate-y-full rounded-full bg-[#F4F1EA]/10 transition-transform duration-300 ease-out group-hover:translate-y-0" />
           <span className="relative z-10 inline-flex items-center gap-2">
             {children}
           </span>

@@ -16,10 +16,24 @@ export default {
         muted: 'hsl(var(--muted) / <alpha-value>)',
         stroke: 'hsl(var(--stroke) / <alpha-value>)',
         accent: 'hsl(var(--accent) / <alpha-value>)',
+
+        // New Master Palette
+        obsidian: '#0A0A0B',
+        charcoal: '#121214',
+        ivory: '#F4F1EA',
+        'warm-white': '#E8E5DE',
+        'muted-stone': '#92908B',
+        'violet-accent': '#7C5CFF',
+        champagne: '#D8C39A',
+        coral: '#FF8066',
+        sage: '#A6D7B8',
       },
       fontFamily: {
-        body: ['var(--font-body)', 'sans-serif'],
-        display: ['var(--font-display)', 'serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
+        body: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Instrument Serif', 'Georgia', 'serif'],
       },
       animation: {
         'scroll-down': 'scroll-down 1.5s ease-in-out infinite',

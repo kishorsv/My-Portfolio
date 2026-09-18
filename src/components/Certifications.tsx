@@ -9,11 +9,11 @@ export function Certifications() {
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
 
   return (
-    <section id="certifications" className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
+    <section id="certifications" className="bg-[#0A0A0B] py-28 md:py-36 relative overflow-hidden">
       {/* Editorial Section Divider */}
-      <SectionDivider number="07" label="VERIFIED CREDENTIALS" />
+      <SectionDivider number="08" label="VERIFIED CREDENTIALS" />
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,14 +22,14 @@ export function Certifications() {
           transition={{ duration: 0.8 }}
           className="mb-14"
         >
-          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-3 block">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8C39A] mb-3 block">
             Certifications 🎓
           </span>
-          <h2 className="heading-clamp font-light tracking-tight text-text-primary">
-            Verified <span className="font-display italic text-[#89AACC]">credentials</span>
+          <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA]">
+            Verified <span className="font-display italic text-[#D8C39A]">credentials.</span>
           </h2>
-          <p className="text-sm md:text-base text-muted max-w-xl mt-3 leading-relaxed font-light">
-            Comprehensive curriculum programs completed across generative AI, machine learning pipelines, and full-stack software development.
+          <p className="text-sm md:text-base text-[#92908B] max-w-xl mt-3 leading-relaxed font-light">
+            Curriculum programs completed across generative AI, machine learning pipelines, and full-stack software development.
           </p>
         </motion.div>
 

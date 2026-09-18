@@ -64,17 +64,17 @@ export function EducationAndGithub() {
 
   const levelColors = [
     'bg-white/5',
-    'bg-[#4E85BF]/30',
-    'bg-[#4E85BF]/60',
-    'bg-[#89AACC]',
+    'bg-[#7C5CFF]/30',
+    'bg-[#7C5CFF]/60',
+    'bg-[#7C5CFF]',
   ];
 
   return (
-    <section id="education" className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
+    <section id="education" className="bg-[#0A0A0B] py-28 md:py-36 relative overflow-hidden">
       {/* Editorial Section Divider */}
-      <SectionDivider number="09" label="ACADEMICS & GITHUB VELOCITY" />
+      <SectionDivider number="10" label="ACADEMICS & GITHUB VELOCITY" />
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,11 +83,11 @@ export function EducationAndGithub() {
           transition={{ duration: 0.8 }}
           className="mb-14"
         >
-          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-3 block">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8C39A] mb-3 block">
             Academic & Developer Footprint
           </span>
-          <h2 className="heading-clamp font-light tracking-tight text-text-primary">
-            Education & <span className="font-display italic text-[#89AACC]">activity</span>
+          <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA]">
+            Education & <span className="font-display italic text-[#D8C39A]">activity.</span>
           </h2>
           <p className="text-sm md:text-base text-muted max-w-xl mt-3 leading-relaxed font-light">
             Formal engineering grounding paired with consistent daily GitHub open-source code commits and development velocity.

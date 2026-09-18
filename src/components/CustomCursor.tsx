@@ -68,14 +68,28 @@ export function CustomCursor() {
       {/* Dynamic Cursor Body */}
       <motion.div
         animate={{
-          width: mode === 'project' ? 68 : mode === 'link' ? 36 : mode === 'image' ? 56 : 10,
-          height: mode === 'project' ? 26 : mode === 'link' ? 36 : mode === 'image' ? 56 : 10,
+          width: mode === 'project' ? 76 : mode === 'link' ? 30 : mode === 'image' ? 52 : 8,
+          height: mode === 'project' ? 30 : mode === 'link' ? 30 : mode === 'image' ? 52 : 8,
           borderRadius: 9999,
-          backgroundColor: mode === 'image' ? 'rgba(137, 170, 204, 0.25)' : '#f5f5f5',
-          backdropFilter: mode === 'image' ? 'blur(4px)' : 'none',
-          boxShadow: mode === 'default' ? '0 0 12px rgba(137, 170, 204, 0.6)' : '0 4px 20px rgba(0, 0, 0, 0.4)',
+          backgroundColor:
+            mode === 'image'
+              ? 'rgba(244, 241, 234, 0.12)'
+              : mode === 'link'
+              ? 'rgba(244, 241, 234, 0.05)'
+              : '#F4F1EA',
+          border:
+            mode === 'link'
+              ? '1px solid rgba(244, 241, 234, 0.5)'
+              : mode === 'image'
+              ? '1px solid rgba(244, 241, 234, 0.25)'
+              : 'none',
+          backdropFilter: mode === 'image' ? 'blur(8px)' : 'none',
+          boxShadow:
+            mode === 'default'
+              ? '0 0 10px rgba(124, 92, 255, 0.4)'
+              : '0 8px 24px rgba(0, 0, 0, 0.6)',
         }}
-        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+        transition={{ type: 'spring', damping: 28, stiffness: 380 }}
         className="flex items-center justify-center overflow-hidden"
       >
         {mode === 'project' && (
@@ -83,21 +97,20 @@ export function CustomCursor() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="text-[10px] text-bg font-bold tracking-wider"
+            className="text-[10px] text-[#0A0A0B] font-mono font-bold tracking-widest flex items-center gap-1"
           >
-            VIEW
+            <span>VIEW</span>
+            <span>↗</span>
           </motion.span>
         )}
 
         {mode === 'link' && (
           <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="text-sm text-bg font-bold"
-          >
-            ↗
-          </motion.span>
+            className="w-1.5 h-1.5 rounded-full bg-[#F4F1EA]"
+          />
         )}
       </motion.div>
     </motion.div>

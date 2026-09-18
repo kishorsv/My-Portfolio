@@ -13,11 +13,11 @@ const CATEGORY_ICONS = {
 
 export function Achievements() {
   return (
-    <section id="achievements" className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
+    <section id="achievements" className="bg-[#0A0A0B] py-28 md:py-36 relative overflow-hidden">
       {/* Editorial Section Divider */}
-      <SectionDivider number="08" label="HONORS & MILESTONES" />
+      <SectionDivider number="09" label="HONORS & MILESTONES" />
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,13 +26,13 @@ export function Achievements() {
           transition={{ duration: 0.8 }}
           className="mb-14"
         >
-          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-3 block">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8C39A] mb-3 block">
             Milestones & Recognition
           </span>
-          <h2 className="heading-clamp font-light tracking-tight text-text-primary">
-            Key <span className="font-display italic text-[#89AACC]">achievements</span>
+          <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA]">
+            Key <span className="font-display italic text-[#D8C39A]">achievements.</span>
           </h2>
-          <p className="text-sm md:text-base text-muted max-w-xl mt-3 leading-relaxed font-light">
+          <p className="text-sm md:text-base text-[#92908B] max-w-xl mt-3 leading-relaxed font-light">
             Verified milestones across athletic competition, civic hackathon sprints, technical workshops, and open-source contributions.
           </p>
         </motion.div>

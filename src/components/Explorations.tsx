@@ -1,181 +1,167 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { explorations, type ExplorationItem } from '../data/explorations';
-import { Lightbox } from './Lightbox';
-import { Sparkles, Eye } from 'lucide-react';
-import { useReducedMotion } from '../hooks/useReducedMotion';
+import { SectionDivider } from './SectionDivider';
+import { Sparkles, Terminal, Activity, Layers } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function Explorations() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const centerContentRef = useRef<HTMLDivElement | null>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const [selectedItem, setSelectedItem] = useState<ExplorationItem | null>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const bgLayerRef = useRef<HTMLDivElement | null>(null);
+  const midLayerRef = useRef<HTMLDivElement | null>(null);
+  const fgLayerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
-
     const ctx = gsap.context(() => {
-      // Pin center content block
-      if (centerContentRef.current && sectionRef.current) {
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          pin: centerContentRef.current,
-          pinSpacing: false,
+      // 35 — 3 Parallax Speeds via ScrollTrigger
+      // Background: 0.25x
+      if (bgLayerRef.current && sectionRef.current) {
+        gsap.to(bgLayerRef.current, {
+          y: -80,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
         });
       }
 
-      // Parallax movement for each card
-      cardsRef.current.forEach((card, index) => {
-        if (!card) return;
-        const item = explorations[index];
-        const movement = (item?.speed || 0.2) * 400; // Parallax distance
+      // Middle: 0.65x
+      if (midLayerRef.current && sectionRef.current) {
+        gsap.to(midLayerRef.current, {
+          y: -180,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
 
-        gsap.fromTo(
-          card,
-          { y: movement / 2 },
-          {
-            y: -movement / 2,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2,
-            },
-          }
-        );
-      });
+      // Foreground: 1.1x
+      if (fgLayerRef.current && sectionRef.current) {
+        gsap.to(fgLayerRef.current, {
+          y: -300,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  }, []);
 
   return (
     <section
-      id="explorations"
+      id="experiments"
       ref={sectionRef}
-      className="relative min-h-[220vh] md:min-h-[300vh] bg-bg py-24 px-6 md:px-12 overflow-hidden"
+      className="bg-[#0A0A0B] py-36 md:py-48 relative overflow-hidden select-none"
     >
-      {/* Pinned Center Layer */}
+      {/* Section Divider */}
+      <SectionDivider number="06" label="CREATIVE LABORATORY & PROTOTYPES" />
+
+      {/* Parallax Background Layer (0.25x) */}
       <div
-        ref={centerContentRef}
-        className="w-full flex items-center justify-center pointer-events-none z-10 py-12"
-        style={{ minHeight: '80vh' }}
+        ref={bgLayerRef}
+        className="absolute inset-0 pointer-events-none z-0 opacity-40 flex items-center justify-between px-8"
       >
-        <div className="max-w-md text-center pointer-events-auto backdrop-blur-md bg-bg/75 p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl">
-          {/* Eyebrow */}
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#89AACC] animate-pulse" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted font-medium">
-              Explorations
-            </span>
+        <div className="w-72 h-72 rounded-full bg-[radial-gradient(circle,rgba(124,92,255,0.06)_0%,transparent_70%)] blur-3xl" />
+        <div className="w-96 h-96 rounded-full bg-[radial-gradient(circle,rgba(216,195,154,0.04)_0%,transparent_70%)] blur-3xl" />
+      </div>
+
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 pt-10">
+        {/* Section 34 — Center Heading */}
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-[#7C5CFF] mb-4">
+            <Sparkles size={13} />
+            <span>CREATIVE LAB</span>
           </div>
 
-          {/* Heading */}
-          <h2 className="text-4xl sm:text-5xl font-sans tracking-tight text-text-primary mb-4">
-            Visual <span className="font-display italic text-[#89AACC]">playground</span>
+          <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA] leading-[0.95]">
+            <span className="block font-sans font-bold">VISUAL</span>
+            <span className="font-display italic text-[#D8C39A] font-normal block text-[1.15em]">
+              playground.
+            </span>
           </h2>
 
-          {/* Description */}
-          <p className="text-xs sm:text-sm text-muted leading-relaxed mb-6">
-            Experiments, interfaces, ideas, and visual explorations created while learning and building.
+          <p className="text-sm sm:text-base text-[#92908B] font-light mt-4 leading-relaxed">
+            Unconstrained algorithmic sketches, shader experiments, and interface micro-interactions built during deep work sprints.
           </p>
+        </div>
 
-          {/* Button */}
-          <a
-            href="https://github.com/kishorsv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold accent-gradient text-bg hover:opacity-90 transition-opacity shadow-lg shadow-[#4E85BF]/20"
+        {/* Section 35 — 3-Speed Parallax Floating Compositions */}
+        <div className="relative min-h-[550px] sm:min-h-[650px] md:min-h-[750px] w-full">
+          {/* Middle Parallax Card (0.65x) - Left Top */}
+          <div
+            ref={midLayerRef}
+            className="absolute top-4 left-0 sm:left-4 md:left-8 w-64 sm:w-80 p-6 rounded-3xl border border-white/10 bg-[#121214]/80 backdrop-blur-xl shadow-2xl rotate-[-3deg] transition-transform duration-500 hover:rotate-0 hover:border-white/25 hover:z-20 cursor-pointer"
+            data-cursor="image"
           >
-            <span>Explore more</span>
-            <span>↗</span>
-          </a>
+            <div className="flex items-center justify-between text-[10px] font-mono text-[#92908B] uppercase mb-4">
+              <span className="flex items-center gap-1.5 text-[#7C5CFF]">
+                <Activity size={12} />
+                <span>EXP / 01</span>
+              </span>
+              <span>AUDIO FFT</span>
+            </div>
+            <h4 className="text-lg font-medium text-[#F4F1EA] mb-2">Kinetic Serif Wave</h4>
+            <p className="text-xs text-[#92908B] font-light leading-relaxed mb-4">
+              Real-time variable serif optical axis morphing driven by microphone frequency spectrums.
+            </p>
+            <div className="h-20 rounded-xl bg-black/60 border border-white/5 flex items-center justify-center font-mono text-[10px] text-[#7C5CFF]">
+              Hz: 44.1kHz • BINS: 1024
+            </div>
+          </div>
+
+          {/* Foreground Parallax Card (1.1x) - Center Right */}
+          <div
+            ref={fgLayerRef}
+            className="absolute top-24 sm:top-28 right-0 sm:right-6 md:right-12 w-72 sm:w-96 p-7 rounded-[32px] border border-white/10 bg-[#121214]/90 backdrop-blur-2xl shadow-2xl rotate-[3deg] transition-transform duration-500 hover:rotate-0 hover:border-[#D8C39A]/40 hover:z-30 cursor-pointer"
+            data-cursor="image"
+          >
+            <div className="flex items-center justify-between text-[10px] font-mono text-[#92908B] uppercase mb-4">
+              <span className="flex items-center gap-1.5 text-[#D8C39A]">
+                <Terminal size={12} />
+                <span>EXP / 02</span>
+              </span>
+              <span>LOCAL RUNTIME</span>
+            </div>
+            <h4 className="text-xl font-medium text-[#F4F1EA] mb-2">Latent Space Manifold</h4>
+            <p className="text-xs text-[#92908B] font-light leading-relaxed mb-4">
+              High-dimensional t-SNE projection clustering 10,000 token embeddings in real-time WebGL.
+            </p>
+            <div className="h-24 rounded-2xl bg-black/70 border border-white/10 flex items-center justify-between px-4 font-mono text-[11px]">
+              <span className="text-[#92908B]">Clusters: 16</span>
+              <span className="text-[#A6D7B8]">60.0 FPS</span>
+            </div>
+          </div>
+
+          {/* Middle Parallax Card (0.65x) - Bottom Center */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-64 sm:w-88 p-6 rounded-2xl border border-white/10 bg-[#121214]/85 backdrop-blur-xl shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform cursor-pointer">
+            <div className="flex items-center justify-between text-[10px] font-mono text-[#92908B] uppercase mb-3">
+              <span className="flex items-center gap-1.5 text-[#FF8066]">
+                <Layers size={12} />
+                <span>EXP / 03</span>
+              </span>
+              <span>LOCAL FIRST</span>
+            </div>
+            <h4 className="text-base font-medium text-[#F4F1EA] mb-1">Bidirectional Note Lattice</h4>
+            <p className="text-xs text-[#92908B] font-light">
+              Cyclic graph rendering with force-directed physics for personal knowledge graphs.
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* Parallax Gallery: Two Columns with alternating speed and rotation */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-36 relative z-20 pt-16">
-        {explorations.map((item, idx) => {
-          const isLeftCol = idx % 2 === 0;
-
-          return (
-            <div
-              key={item.id}
-              className={`flex justify-center ${isLeftCol ? 'md:justify-start' : 'md:justify-end'}`}
-            >
-              <div
-                ref={(el) => {
-                  cardsRef.current[idx] = el;
-                }}
-                onClick={() => setSelectedItem(item)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setSelectedItem(item);
-                  }
-                }}
-                style={{
-                  transform: prefersReducedMotion ? 'none' : `rotate(${item.rotation}deg)`,
-                }}
-                className="group relative w-full aspect-square max-w-[320px] rounded-3xl bg-surface border border-stroke p-6 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-[#89AACC]/60 hover:shadow-2xl hover:shadow-[#4E85BF]/15 focus:outline-none focus:ring-2 focus:ring-[#89AACC]"
-              >
-                {/* Background Gradient */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${item.gradient} transition-transform duration-500 group-hover:scale-110`}
-                />
-
-                {/* Halftone texture */}
-                <div className="absolute inset-0 halftone-overlay pointer-events-none" />
-
-                {/* Center visual icon/shape */}
-                <div className="relative z-10 my-auto flex flex-col items-center justify-center">
-                  <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Sparkles size={28} className="text-[#89AACC]" />
-                  </div>
-                  <span className="text-xs uppercase tracking-[0.25em] text-muted/80 font-mono">
-                    {item.category}
-                  </span>
-                </div>
-
-                {/* Card Bottom: Title and view pill */}
-                <div className="relative z-10 flex items-end justify-between">
-                  <div>
-                    <h3 className="text-lg font-display italic text-text-primary leading-tight group-hover:text-[#89AACC] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-[11px] text-muted line-clamp-1 mt-0.5 font-mono">
-                      {item.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="w-8 h-8 rounded-full bg-bg/80 border border-stroke flex items-center justify-center text-muted group-hover:text-text-primary group-hover:border-white/30 transition-all shrink-0">
-                    <Eye size={14} />
-                  </div>
-                </div>
-
-                {/* Hover overlay hint */}
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
-                  <span className="px-4 py-1.5 rounded-full text-xs font-mono text-text-primary bg-bg/90 border border-[#89AACC]/50 shadow-lg">
-                    Click to Inspect
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Lightbox Modal */}
-      <Lightbox item={selectedItem} onClose={() => setSelectedItem(null)} />
     </section>
   );
 }

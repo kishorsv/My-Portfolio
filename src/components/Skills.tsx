@@ -1,158 +1,215 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionDivider } from './SectionDivider';
-import { Sparkles } from 'lucide-react';
 
-interface TechItem {
+interface WallItem {
+  id: string;
   name: string;
-  category: 'AI' | 'GENAI' | 'FRONTEND' | 'BACKEND' | 'LANGUAGES' | 'TOOLS';
-  scale: 'lg' | 'md' | 'sm';
-  detail: string;
+  font: 'sans' | 'serif';
+  size: 'giant' | 'large' | 'medium';
+  align: 'left' | 'center' | 'right';
+  domain: string;
+  description: string;
 }
 
-const TECH_CLOUD: TechItem[] = [
-  { name: 'Python', category: 'LANGUAGES', scale: 'lg', detail: 'Primary language for AI/ML pipelines, algorithms, and backend services.' },
-  { name: 'Generative AI', category: 'GENAI', scale: 'lg', detail: 'LLMs, semantic prompting, attention mechanisms, and multi-agent coordination.' },
-  { name: 'React 19', category: 'FRONTEND', scale: 'lg', detail: 'Component architecture, concurrent rendering, and tactile reactive interfaces.' },
-  { name: 'LangChain', category: 'GENAI', scale: 'md', detail: 'Chaining agents, structured tools, memory stores, and vector indices.' },
-  { name: 'TypeScript', category: 'LANGUAGES', scale: 'lg', detail: 'Strict type contracts ensuring reliable full-stack software systems.' },
-  { name: 'FastAPI', category: 'BACKEND', scale: 'md', detail: 'High-performance async Python APIs with automatic OpenAPI schemas.' },
-  { name: 'Tailwind CSS', category: 'FRONTEND', scale: 'md', detail: 'Utility-first styling, design token systems, and fluid responsive layouts.' },
-  { name: 'Node.js', category: 'BACKEND', scale: 'md', detail: 'Runtime environment for microservices, WebSockets, and build tooling.' },
-  { name: 'MediaPipe', category: 'AI', scale: 'md', detail: 'Edge computer vision and real-time client-side skeletal tracking.' },
-  { name: 'Vector DBs', category: 'GENAI', scale: 'md', detail: 'High-dimensional embedding similarity search (pgvector & Pinecone).' },
-  { name: 'Next.js', category: 'FRONTEND', scale: 'sm', detail: 'Server-side rendering, routing, and hybrid static web applications.' },
-  { name: 'PostgreSQL', category: 'BACKEND', scale: 'sm', detail: 'Relational data modeling, ACID transactions, and spatial extensions.' },
-  { name: 'vLLM', category: 'GENAI', scale: 'sm', detail: 'High-throughput PagedAttention edge inference deployment.' },
-  { name: 'Git & GitHub', category: 'TOOLS', scale: 'md', detail: 'Version control, branch workflows, pull requests, and CI/CD actions.' },
-  { name: 'DSA', category: 'LANGUAGES', scale: 'md', detail: 'Algorithmic problem solving: trees, graphs, dynamic programming.' },
-  { name: 'WebSockets', category: 'BACKEND', scale: 'sm', detail: 'Bi-directional low-latency full-duplex communication protocols.' },
-  { name: 'Framer Motion', category: 'FRONTEND', scale: 'sm', detail: 'Spring physics, layout animations, and gesture micro-interactions.' },
-  { name: 'Docker', category: 'TOOLS', scale: 'sm', detail: 'Containerizing services for reproducible cloud and local deployments.' },
-  { name: 'REST APIs', category: 'BACKEND', scale: 'sm', detail: 'Standardized stateless API endpoints with JWT authentication.' },
-  { name: 'Vercel', category: 'TOOLS', scale: 'sm', detail: 'Continuous edge delivery and preview environments for modern web.' },
+const WALL_ITEMS: WallItem[] = [
+  {
+    id: 'python',
+    name: 'PYTHON',
+    font: 'sans',
+    size: 'giant',
+    align: 'left',
+    domain: 'CORE LANGUAGE · ML RUNTIME',
+    description: 'Foundation for neural architectures, asynchronous FastAPI microservices, and mathematical computation.',
+  },
+  {
+    id: 'react',
+    name: 'React 19',
+    font: 'serif',
+    size: 'giant',
+    align: 'right',
+    domain: 'UI ARCHITECTURE · REACTIVITY',
+    description: 'Concurrent rendering, tactile interfaces, zero-layout-shift streaming, and state machines.',
+  },
+  {
+    id: 'ai',
+    name: 'AI AGENTS',
+    font: 'sans',
+    size: 'large',
+    align: 'center',
+    domain: 'AUTONOMOUS REASONING',
+    description: 'Multi-agent orchestration, tool usage, hierarchical memory systems, and deterministic evaluation.',
+  },
+  {
+    id: 'typescript',
+    name: 'TypeScript',
+    font: 'serif',
+    size: 'giant',
+    align: 'left',
+    domain: 'TYPE CONTRACTS · SYSTEMS',
+    description: 'Compile-time correctness, algebraic data types, and enterprise-grade full-stack consistency.',
+  },
+  {
+    id: 'genai',
+    name: 'GENERATIVE AI',
+    font: 'sans',
+    size: 'giant',
+    align: 'center',
+    domain: 'LLM WORKFLOWS & RAG',
+    description: 'High-dimensional vector embeddings, semantic search spaces, prompt design, and model fine-tuning.',
+  },
+  {
+    id: 'fullstack',
+    name: 'Full-Stack',
+    font: 'serif',
+    size: 'large',
+    align: 'right',
+    domain: 'END-TO-END ENGINEERING',
+    description: 'Bridging algorithmic AI backends with ultra-responsive, accessible client-side experiences.',
+  },
+  {
+    id: 'tailwind',
+    name: 'TAILWIND',
+    font: 'sans',
+    size: 'large',
+    align: 'left',
+    domain: 'DESIGN TOKEN SYSTEMS',
+    description: 'Modern aesthetic control, fluid typographic clamp matrices, and dark luxury palettes.',
+  },
+  {
+    id: 'nodejs',
+    name: 'Node.js',
+    font: 'serif',
+    size: 'giant',
+    align: 'right',
+    domain: 'ASYNC SERVER RUNTIME',
+    description: 'High-throughput WebSockets, microservices, and local-first SQLite file system bridges.',
+  },
+  {
+    id: 'fastapi',
+    name: 'FASTAPI',
+    font: 'sans',
+    size: 'medium',
+    align: 'center',
+    domain: 'HIGH-SPEED PYTHON APIS',
+    description: 'Pydantic validation, async worker pools, and automated OpenAPI documentation.',
+  },
+  {
+    id: 'vectordb',
+    name: 'Vector Embeddings',
+    font: 'serif',
+    size: 'large',
+    align: 'left',
+    domain: 'SEMANTIC MEMORY',
+    description: 'Cosine similarity indices, pgvector retrieval, and sub-50ms contextual RAG pipelines.',
+  },
 ];
 
-const CATEGORIES = ['ALL', 'AI', 'GENAI', 'FRONTEND', 'BACKEND', 'LANGUAGES', 'TOOLS'] as const;
-
 export function Skills() {
-  const [activeCategory, setActiveCategory] = useState<typeof CATEGORIES[number]>('ALL');
-  const [hoveredTech, setHoveredTech] = useState<TechItem | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const filteredTech = activeCategory === 'ALL'
-    ? TECH_CLOUD
-    : TECH_CLOUD.filter((t) => t.category === activeCategory);
+  const activeItem = WALL_ITEMS.find((item) => item.id === hoveredId);
 
   return (
-    <section id="skills" className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
-      {/* Editorial Section Divider */}
-      <SectionDivider number="02" label="TECHNICAL CLOUD & MATRIX" />
+    <section id="skills" className="bg-[#0A0A0B] py-32 md:py-44 relative overflow-hidden select-none">
+      {/* Section Divider */}
+      <SectionDivider number="04" label="INTERACTIVE TYPOGRAPHY WALL" />
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-3 block">
-              Skill Constellation
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8C39A] mb-3 block">
+              CAPABILITY MATRIX
             </span>
-            <h2 className="heading-clamp font-light tracking-tight text-text-primary">
-              The <span className="font-display italic text-[#89AACC]">technology</span> cloud
+            <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA]">
+              The <span className="font-display italic text-[#D8C39A]">technical</span> poster.
             </h2>
           </div>
 
-          {/* Interactive Category Filter Tabs */}
-          <div className="flex flex-wrap gap-1.5 p-1 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1 text-[11px] font-mono uppercase tracking-wider rounded-full transition-all duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-text-primary text-bg font-semibold shadow-md'
-                    : 'text-muted hover:text-text-primary hover:bg-white/5'
-                }`}
-                data-cursor="link"
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="text-xs font-mono text-[#92908B] tracking-wider uppercase">
+            HOVER OVER WORDS TO INSPECT RUNTIMES
           </div>
         </div>
 
-        {/* Interactive Technology Cloud Area */}
-        <div className="relative min-h-[380px] p-8 md:p-14 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md flex flex-wrap items-center justify-center gap-x-6 gap-y-5 select-none transition-all">
-          {filteredTech.map((tech) => {
-            const isHovered = hoveredTech?.name === tech.name;
-            const hasHover = hoveredTech !== null;
-            const isDimmed = hasHover && !isHovered;
+        {/* Section 31 — Giant Interactive Typography Wall (No badges/pills) */}
+        <div className="relative border-y border-white/10 py-16 sm:py-20 flex flex-col gap-6 sm:gap-8">
+          {WALL_ITEMS.map((item) => {
+            const isHovered = hoveredId === item.id;
+            const isDimmed = hoveredId !== null && !isHovered;
 
             return (
-              <motion.div
-                key={tech.name}
-                onMouseEnter={() => setHoveredTech(tech)}
-                onMouseLeave={() => setHoveredTech(null)}
-                layout
-                className={`cursor-pointer transition-all duration-300 relative px-4 py-2 rounded-2xl border ${
-                  isHovered
-                    ? 'border-[#89AACC] bg-white/10 shadow-[0_0_24px_rgba(137,170,204,0.35)] scale-110 z-20'
-                    : isDimmed
-                    ? 'border-transparent text-muted/30 opacity-30 blur-[0.3px] scale-95'
-                    : 'border-white/5 bg-white/[0.02] text-text-primary hover:border-white/20'
+              <div
+                key={item.id}
+                onMouseEnter={() => setHoveredId(item.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                className={`w-full flex transition-all duration-300 cursor-pointer ${
+                  item.align === 'left'
+                    ? 'justify-start'
+                    : item.align === 'center'
+                    ? 'justify-center'
+                    : 'justify-end'
                 }`}
                 data-cursor="link"
               >
-                <span
-                  className={`font-mono tracking-tight font-medium ${
-                    tech.scale === 'lg'
-                      ? 'text-2xl sm:text-3xl md:text-4xl text-text-primary'
-                      : tech.scale === 'md'
-                      ? 'text-lg sm:text-xl md:text-2xl text-text-primary/90'
-                      : 'text-sm sm:text-base text-muted/90'
+                <motion.span
+                  animate={{
+                    opacity: isHovered ? 1 : isDimmed ? 0.2 : 0.75,
+                    scale: isHovered ? 1.03 : 1,
+                    y: isHovered ? -2 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className={`inline-block tracking-tighter transition-colors duration-300 ${
+                    item.font === 'serif' ? 'font-display italic' : 'font-sans font-bold'
+                  } ${
+                    item.size === 'giant'
+                      ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl'
+                      : item.size === 'large'
+                      ? 'text-3xl sm:text-5xl md:text-6xl'
+                      : 'text-2xl sm:text-4xl md:text-5xl'
+                  } ${
+                    isHovered
+                      ? 'text-[#F4F1EA] drop-shadow-[0_0_24px_rgba(216,195,154,0.3)]'
+                      : 'text-[#92908B]'
                   }`}
                 >
-                  {tech.name}
-                </span>
-
-                {/* Subtle category dot */}
-                <span className="w-1.5 h-1.5 rounded-full bg-[#89AACC] ml-2 inline-block opacity-60" />
-              </motion.div>
+                  {item.name}
+                </motion.span>
+              </div>
             );
           })}
 
-          {/* Floating Spotlight Detail Card for Hovered Tech */}
-          <div className="w-full mt-8 pt-6 border-t border-white/10 flex items-center justify-between min-h-[50px]">
+          {/* Floating Sticky Technical Detail HUD at Bottom */}
+          <div className="min-h-[72px] mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
             <AnimatePresence mode="wait">
-              {hoveredTech ? (
+              {activeItem ? (
                 <motion.div
-                  key={hoveredTech.name}
+                  key={activeItem.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-2"
+                  transition={{ duration: 0.25 }}
+                  className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-semibold text-[#89AACC] px-3 py-1 rounded-full bg-white/5 border border-white/10">
-                      {hoveredTech.category}
-                    </span>
-                    <span className="text-sm sm:text-base text-text-primary font-medium">
-                      {hoveredTech.name}
+                    <span className="w-2 h-2 rounded-full bg-[#7C5CFF] animate-pulse" />
+                    <span className="text-[#D8C39A] font-semibold tracking-widest uppercase">
+                      {activeItem.domain}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-muted font-light max-w-xl">
-                    {hoveredTech.detail}
-                  </p>
+                  <div className="text-sm text-[#F4F1EA] font-light max-w-xl">
+                    {activeItem.description}
+                  </div>
                 </motion.div>
               ) : (
                 <motion.div
-                  key="empty-hint"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="text-xs font-mono text-muted/60 flex items-center gap-2"
+                  className="text-xs font-mono text-[#92908B]/60 tracking-widest uppercase flex items-center gap-2"
                 >
-                  <Sparkles size={12} className="text-[#89AACC]" />
-                  <span>Hover over any technology node to inspect architectural role and capabilities</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                  <span>EXPLORE STACK BY HOVERING ABOVE</span>
                 </motion.div>
               )}
             </AnimatePresence>

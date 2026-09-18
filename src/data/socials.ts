@@ -5,29 +5,31 @@ export interface SocialLink {
 }
 
 export const personalInfo = {
-  name: 'Kishor S V',
+  name: 'KISHOR SV',
   shortName: 'KS',
-  primaryRole: 'AI/ML Engineer & Full-Stack Developer',
-  location: 'Bengaluru, India',
-  eyebrow: "COLLECTION '26",
+  primaryRole: 'AI/ML ENGINEER · FULL-STACK DEVELOPER',
+  location: 'BENGALURU, INDIA',
+  eyebrow: 'DIGITAL PORTFOLIO 2026',
   email: 'kishorsv.work@gmail.com',
-  shortTagline:
-    'I build AI-powered products and modern full-stack applications that turn ideas into working solutions.',
+  heroStatement: 'I BUILD INTELLIGENT DIGITAL EXPERIENCES.',
+  secondaryStatement: 'AI, interfaces, and full-stack systems — turned from ideas into working products.',
+  shortTagline: 'AI, interfaces, and full-stack systems — turned from ideas into working products.',
+  year: '2026',
   aboutMe: {
     status: '2nd-Year Engineering Student (AI/ML Specialization)',
     focus: 'AI/ML & Modern Full-Stack Development',
     genAiPassion:
       'Passionate about Generative AI, autonomous agents, and building intelligent LLM workflows that solve non-trivial problems.',
     philosophy:
-      'I believe in learning by building. Rather than just memorizing theory, I turn complex concepts into production-ready web platforms.',
+      'Good technology should feel simple. I turn complex technology into dependable, human-friendly digital products.',
     careerGoal:
       'Dedicated to becoming a high-impact professional AI/ML engineer and software architect building products used by millions.',
   },
   rotatingRoles: [
-    'AI/ML Engineer',
-    'Full-Stack Developer',
-    'GenAI Builder',
-    'Problem Solver',
+    'GENERATIVE AI',
+    'FULL-STACK SYSTEMS',
+    'INTERACTIVE PRODUCTS',
+    'CREATIVE TECHNOLOGY',
   ],
   stats: [
     { value: 20, suffix: '+', label: 'Experiments & Builds' },

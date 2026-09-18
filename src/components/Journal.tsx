@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { journalArticles, type JournalArticle } from '../data/journal';
 import { SectionDivider } from './SectionDivider';
 import { ArrowUpRight } from 'lucide-react';
@@ -8,82 +9,114 @@ interface JournalProps {
 }
 
 export function Journal({ onSelectArticle }: JournalProps) {
+  const [hoveredArticle, setHoveredArticle] = useState<JournalArticle | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
   return (
-    <section className="bg-[#080808] py-24 md:py-36 relative overflow-hidden">
-      {/* Editorial Section Divider */}
-      <SectionDivider number="06" label="EDITORIAL JOURNAL & ESSAYS" />
+    <section
+      id="journal"
+      onMouseMove={handleMouseMove}
+      className="bg-[#0A0A0B] py-32 md:py-44 relative overflow-hidden select-none"
+    >
+      {/* Section Divider */}
+      <SectionDivider number="07" label="EDITORIAL JOURNAL & ESSAYS" />
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 pt-8">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-12 lg:px-20 pt-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-14"
-        >
-          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#89AACC] mb-3 block">
-            Recent Thoughts & Articles
+        <div className="mb-16">
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8C39A] mb-3 block">
+            ESSAYS & WRITTEN ARCHITECTURE
           </span>
-          <h2 className="heading-clamp font-light tracking-tight text-text-primary">
-            Engineering <span className="font-display italic text-[#89AACC]">journal</span>
+          <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA]">
+            Engineering <span className="font-display italic text-[#D8C39A]">journal.</span>
           </h2>
-          <p className="text-sm md:text-base text-muted max-w-xl mt-3 leading-relaxed font-light">
-            Notes on applied machine learning, client-side inference, tactile UI ergonomics, and product development.
-          </p>
-        </motion.div>
+        </div>
 
-        {/* Large Horizontal Editorial Rows */}
+        {/* Section 33 — Editorial Article List */}
         <div className="border-t border-white/10">
           {journalArticles.map((article, idx) => {
             const num = String(idx + 1).padStart(2, '0');
+            const isHovered = hoveredArticle?.id === article.id;
 
             return (
-              <motion.div
+              <div
                 key={article.id}
                 onClick={() => onSelectArticle(article)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative border-b border-white/10 py-7 md:py-9 transition-all duration-300 hover:bg-white/[0.02] cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-6 px-4 md:px-6 rounded-2xl"
+                onMouseEnter={() => setHoveredArticle(article)}
+                onMouseLeave={() => setHoveredArticle(null)}
+                className={`group relative py-8 sm:py-10 border-b transition-all duration-300 cursor-pointer ${
+                  isHovered ? 'border-[#D8C39A]/60 bg-white/[0.02]' : 'border-white/10'
+                }`}
                 data-cursor="link"
               >
-                {/* Left: Number + Title */}
-                <div className="flex items-start md:items-center gap-6 md:gap-10">
-                  <span className="font-mono text-xs text-muted/60 tracking-wider pt-1 md:pt-0">
-                    {num}
-                  </span>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  {/* Left: Number + Title Structure */}
+                  <div className="flex items-start md:items-center gap-6 sm:gap-10">
+                    <span className="font-mono text-xs text-[#92908B] tracking-widest pt-1 md:pt-0">
+                      {num}
+                    </span>
 
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-display italic text-text-primary group-hover:text-[#89AACC] group-hover:translate-x-1.5 transition-all duration-300 leading-tight">
+                    <h3
+                      className={`text-2xl sm:text-3xl md:text-4xl font-light tracking-tight transition-all duration-300 ${
+                        isHovered
+                          ? 'text-[#F4F1EA] translate-x-3 font-medium'
+                          : 'text-[#F4F1EA]/80'
+                      }`}
+                    >
                       {article.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted font-light mt-1 line-clamp-1 max-w-xl">
-                      {article.subtitle}
-                    </p>
                   </div>
-                </div>
 
-                {/* Right: Metadata + Arrow */}
-                <div className="flex items-center justify-between md:justify-end gap-6 shrink-0 pl-10 md:pl-0">
-                  <div className="flex items-center gap-3 text-xs font-mono text-muted/80">
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[#89AACC]">
-                      {article.category}
+                  {/* Right: Metadata + Arrow Reveal */}
+                  <div className="flex items-center gap-8 text-xs font-mono text-[#92908B] tracking-wider uppercase ml-12 md:ml-0">
+                    <span>{article.category} / {article.readTime}</span>
+                    <span>2026</span>
+
+                    <span
+                      className={`p-2 rounded-full border transition-all duration-300 ${
+                        isHovered
+                          ? 'border-[#D8C39A] text-[#D8C39A] translate-x-1 -translate-y-1'
+                          : 'border-white/10 text-white/40'
+                      }`}
+                    >
+                      <ArrowUpRight size={14} />
                     </span>
-                    <span>{article.date}</span>
-                    <span>•</span>
-                    <span>{article.readTime}</span>
-                  </div>
-
-                  <div className="w-10 h-10 rounded-full border border-white/15 bg-white/5 flex items-center justify-center text-muted group-hover:text-text-primary group-hover:border-white/30 group-hover:scale-110 group-hover:rotate-45 transition-all duration-300">
-                    <ArrowUpRight size={16} />
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
+
+        {/* Hover Floating Thumbnail Preview */}
+        <AnimatePresence>
+          {hoveredArticle && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              className="fixed pointer-events-none z-50 hidden lg:block w-64 rounded-2xl overflow-hidden border border-white/20 bg-black/90 p-3 shadow-2xl backdrop-blur-xl"
+              style={{
+                left: mousePos.x + 30,
+                top: mousePos.y - 80,
+              }}
+            >
+              <div className="h-28 rounded-xl bg-gradient-to-tr from-[#1A122E] via-[#121214] to-[#0A0A0B] p-4 flex flex-col justify-between border border-white/10">
+                <span className="text-[10px] font-mono text-[#D8C39A] uppercase">
+                  {hoveredArticle.category}
+                </span>
+                <p className="text-xs text-[#F4F1EA] line-clamp-2">
+                  {hoveredArticle.subtitle}
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

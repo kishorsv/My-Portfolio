@@ -45,21 +45,21 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-surface border border-white/20 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl text-text-primary custom-scrollbar"
+          className="relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-[#121214] border border-white/20 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl text-[#F4F1EA] custom-scrollbar"
         >
           {/* Header Controls */}
-          <div className="flex items-center justify-between pb-6 mb-6 border-b border-stroke">
+          <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#89AACC]" />
-              <span className="text-xs uppercase tracking-[0.25em] text-muted font-mono">
-                Curriculum Vitae • Kishor SV
+              <span className="w-2.5 h-2.5 rounded-full bg-[#7C5CFF]" />
+              <span className="text-xs uppercase tracking-[0.25em] text-[#92908B] font-mono">
+                Curriculum Vitae • KISHOR SV
               </span>
             </div>
 
             <div className="flex items-center gap-3">
               <a
                 href={`mailto:${personalInfo.email}?subject=Resume Request - Kishor SV`}
-                className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-stroke bg-bg/60 text-xs font-mono text-text-primary hover:border-white/30 transition-colors"
+                className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-[#0A0A0B] text-xs font-mono text-[#F4F1EA] hover:border-white/30 transition-colors"
               >
                 <Download size={13} />
                 <span>Request PDF</span>
@@ -67,7 +67,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-bg/80 border border-stroke flex items-center justify-center text-muted hover:text-text-primary hover:border-white/30 transition-all"
+                className="w-8 h-8 rounded-full bg-[#0A0A0B] border border-white/10 flex items-center justify-center text-[#92908B] hover:text-white hover:border-white/30 transition-all"
                 aria-label="Close resume"
               >
                 <X size={16} />
@@ -77,25 +77,25 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
           {/* Profile Header with Avatar */}
           <div className="flex items-center gap-5 mb-8">
-            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-white/20 bg-black/40 flex-shrink-0 shadow-lg">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-[#D8C39A]/40 bg-black/40 flex-shrink-0 shadow-lg">
               <img
                 src="/kishor.jpg"
                 alt={personalInfo.name}
                 className="w-full h-full object-cover object-top filter contrast-[1.04]"
               />
-              <span className="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-black" />
+              <span className="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-[#A6D7B8] ring-2 ring-black" />
             </div>
 
             <div>
-              <h2 className="text-2xl sm:text-3xl font-display italic text-text-primary mb-1">
+              <h2 className="text-2xl sm:text-3xl font-display italic text-[#F4F1EA] mb-1">
                 {personalInfo.name}
               </h2>
-              <p className="text-xs sm:text-sm font-mono text-[#89AACC] mb-1.5">
+              <p className="text-xs sm:text-sm font-mono text-[#D8C39A] mb-1.5">
                 {personalInfo.primaryRole}
               </p>
-              <div className="flex flex-wrap items-center gap-3 text-xs text-muted font-mono">
+              <div className="flex flex-wrap items-center gap-3 text-xs text-[#92908B] font-mono">
                 <span className="flex items-center gap-1">
-                  <MapPin size={12} className="text-[#89AACC]" />
+                  <MapPin size={12} className="text-[#7C5CFF]" />
                   {personalInfo.location}
                 </span>
                 <span>•</span>
@@ -106,19 +106,19 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
           {/* Education */}
           <div className="mb-8">
-            <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#89AACC] mb-4 flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#D8C39A] mb-4 flex items-center gap-2">
               <GraduationCap size={15} />
               Education
             </h3>
-            <div className="p-4 rounded-2xl bg-bg/50 border border-stroke/70">
+            <div className="p-4 rounded-2xl bg-[#0A0A0B]/60 border border-white/10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
-                <span className="text-sm font-semibold text-text-primary">
+                <span className="text-sm font-semibold text-[#F4F1EA]">
                   B.E. in Artificial Intelligence & Machine Learning
                 </span>
-                <span className="text-xs font-mono text-muted">2022 — 2026</span>
+                <span className="text-xs font-mono text-[#92908B]">2022 — 2026</span>
               </div>
-              <p className="text-xs text-muted mb-2">Bengaluru, Karnataka, India</p>
-              <p className="text-xs text-muted/80 leading-relaxed">
+              <p className="text-xs text-[#92908B] mb-2">Bengaluru, Karnataka, India</p>
+              <p className="text-xs text-[#92908B]/90 leading-relaxed">
                 Specializing in Deep Learning, Natural Language Processing, Autonomous Systems, and Full-Stack Web Development.
               </p>
             </div>
@@ -126,18 +126,18 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
           {/* Technical Competencies */}
           <div className="mb-8">
-            <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#89AACC] mb-4 flex items-center gap-2">
+            <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#D8C39A] mb-4 flex items-center gap-2">
               <Code size={15} />
               Core Competencies
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-bg/40 border border-stroke/60">
-                <span className="font-semibold text-text-primary block mb-1">AI & Machine Learning</span>
-                <span className="text-muted font-mono">LangChain, PyTorch, vLLM, Vector DBs (Pinecone, pgvector), MediaPipe, OpenCV, Hugging Face</span>
+              <div className="p-3.5 rounded-xl bg-[#0A0A0B]/50 border border-white/10">
+                <span className="font-semibold text-[#F4F1EA] block mb-1">AI & Machine Learning</span>
+                <span className="text-[#92908B] font-mono">LangChain, PyTorch, vLLM, Vector DBs (Pinecone, pgvector), MediaPipe, OpenCV, Hugging Face</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-bg/40 border border-stroke/60">
-                <span className="font-semibold text-text-primary block mb-1">Full-Stack & Languages</span>
-                <span className="text-muted font-mono">TypeScript, Python, JavaScript, C++, React, Next.js, FastAPI, Node.js, Tailwind CSS</span>
+              <div className="p-3.5 rounded-xl bg-[#0A0A0B]/50 border border-white/10">
+                <span className="font-semibold text-[#F4F1EA] block mb-1">Full-Stack & Languages</span>
+                <span className="text-[#92908B] font-mono">TypeScript, Python, JavaScript, C++, React, Next.js, FastAPI, Node.js, Tailwind CSS</span>
               </div>
               <div className="p-3.5 rounded-xl bg-bg/40 border border-stroke/60">
                 <span className="font-semibold text-text-primary block mb-1">Data & Storage</span>
