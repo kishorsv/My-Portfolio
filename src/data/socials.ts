@@ -13,7 +13,7 @@ export const personalInfo = {
   college: 'Mysore Royal Institute of Technology (MRIT)',
   degree: 'B.E. — Artificial Intelligence (2nd Year)',
   eyebrow: 'DIGITAL PORTFOLIO 2026',
-  email: 'kishorsv.work@gmail.com',
+  email: 'kishukishorsv123@gmail.com',
   heroStatement: 'FROM CONCEPT → DESIGN → INTELLIGENCE → WORKING PRODUCT',
   secondaryStatement:
     'I am Kishor SV, an engineering student focused on Artificial Intelligence, Machine Learning, Generative AI, and Full-Stack Development. I enjoy transforming ideas into working digital products.',
