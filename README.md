@@ -65,7 +65,7 @@ Generates optimized chunks in `/dist` ready for Vercel, Netlify, or GitHub Pages
 
 ---
 
-**Live Demo →** https://new-7c63.vercel.app/
+**Live Demo →** my-portfolio-flax-five-28.vercel.app
 
 
 ## ?? Author
