@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CinematicSmoke } from './CinematicSmoke';
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -8,6 +9,7 @@ interface LoadingScreenProps {
 const SYSTEM_STATUSES = [
   'INITIALIZING INTERFACE',
   'LOADING DIGITAL EXPERIENCE',
+  'IGNITING ATMOSPHERE',
   'BUILDING VISUAL SYSTEM',
   'CONNECTING COMPONENTS',
   'PREPARING INTERACTION',
@@ -27,7 +29,8 @@ interface Particle {
 export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [statusIndex, setStatusIndex] = useState(0);
-  const [phase, setPhase] = useState<'dot' | 'identity' | 'scan' | 'complete' | 'exit'>('dot');
+  const [phase, setPhase] = useState<'dot' | 'identity' | 'structure' | 'scan' | 'complete' | 'exit'>('dot');
+  const [isDispersing, setIsDispersing] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -41,27 +44,35 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
     mouseRef.current.targetY = e.clientY / window.innerHeight;
   }, []);
 
-  // Choreographed Progress Counter (00 -> 100 over ~2.8 seconds)
+  // Choreographed Progress Counter (00 -> 100 over ~3.0 seconds)
   useEffect(() => {
     const startTime = performance.now();
-    const duration = 2800; // 2.8s total duration
+    const duration = 2950; // 2.95s total choreographed duration
 
     const updateProgress = (now: number) => {
       const elapsed = now - startTime;
       const t = Math.min(elapsed / duration, 1);
 
       // Smooth custom ease-out curve
-      const eased = 1 - Math.pow(1 - t, 2.6);
+      const eased = 1 - Math.pow(1 - t, 2.5);
       const currentVal = Math.floor(eased * 100);
 
       setProgress(currentVal);
 
-      // Sequence phase transitions based on progress
-      if (t < 0.16) {
+      // Strict Sequence Phase Mapping:
+      // 0–20%: Almost complete darkness, tiny atmospheric smoke movement, small point of light
+      // 20–40%: Smoke gathers around center, KISHOR identity emerges
+      // 40–60%: Smoke becomes more visible, neural network forms through atmosphere
+      // 60–80%: Identity sharp, scanning beam sweeps, violet/champagne light inside smoke
+      // 80–99%: Full visual composition, smoke expands toward edges
+      // 100%: Brief pause, central light flare, outward smoke dispersal
+      if (t < 0.20) {
         setPhase('dot');
-      } else if (t < 0.38) {
+      } else if (t < 0.40) {
         setPhase('identity');
-      } else if (t < 0.98) {
+      } else if (t < 0.60) {
+        setPhase('structure');
+      } else if (t < 0.85) {
         setPhase('scan');
       } else {
         setPhase('complete');
@@ -73,14 +84,16 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         setProgress(100);
         setPhase('complete');
 
-        // Hold at 100% for 380ms before cinematic reveal
+        // 100% Convergence Moment: Brief pause, central flare, then explosive smoke dispersal
         const completeTimeout = setTimeout(() => {
+          setIsDispersing(true);
           setPhase('exit');
-          setIsFinished(true);
 
+          // Cinematic transformation into main portfolio hero
           const exitTimeout = setTimeout(() => {
+            setIsFinished(true);
             onComplete();
-          }, 700);
+          }, 750);
 
           return () => clearTimeout(exitTimeout);
         }, 380);
@@ -213,24 +226,35 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           exit={{
             clipPath: 'circle(150% at 50% 50%)',
             opacity: 0,
-            transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] },
+            scale: 1.03,
+            filter: 'blur(8px)',
+            transition: { duration: 0.75, ease: [0.77, 0, 0.175, 1] },
           }}
           className="fixed inset-0 z-[9999] flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-[#0A0A0B] text-[#F4F1EA] select-none overflow-hidden"
           role="status"
           aria-label="Loading cinematic experience"
         >
-          {/* Generative Interactive Canvas Background */}
-          <canvas
-            ref={canvasRef}
-            className="absolute inset-0 pointer-events-none z-0 opacity-40 transition-opacity duration-1000"
+          {/* Layer 01: High-Performance WebGL Volumetric Cinematic Smoke */}
+          <CinematicSmoke
+            progress={progress}
+            phase={phase}
+            isDispersing={isDispersing}
           />
 
-          {/* Vignette & Radial Atmosphere */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,11,0.85)_80%)] pointer-events-none z-0" />
+          {/* Layer 02: Generative Interactive Neural Particle Network */}
+          <canvas
+            ref={canvasRef}
+            className={`absolute inset-0 pointer-events-none z-[2] transition-opacity duration-700 ${
+              progress < 20 ? 'opacity-10' : progress < 40 ? 'opacity-25' : 'opacity-40'
+            }`}
+          />
 
-          {/* Section 09: Micro-Typography Corners */}
+          {/* Atmospheric Depth Vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,11,0.85)_80%)] pointer-events-none z-[2]" />
+
+          {/* Section 09: Micro-Typography Corners (z-20) */}
           {/* Top Row: Top-Left & Top-Right */}
-          <div className="relative z-10 flex items-center justify-between text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#92908B] border-b border-white/5 pb-4">
+          <div className="relative z-20 flex items-center justify-between text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#92908B] border-b border-white/5 pb-4">
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -253,8 +277,26 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </motion.div>
           </div>
 
-          {/* Section 03 & 04 & 05: Central Visual Stage */}
-          <div className="relative z-10 flex flex-col items-center justify-center my-auto w-full max-w-4xl mx-auto py-8 text-center">
+          {/* Central Visual Stage */}
+          <div className="relative z-20 flex flex-col items-center justify-center my-auto w-full max-w-4xl mx-auto py-8 text-center">
+            {/* Volumetric Central Light Source (behind typography) */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 rounded-full transition-all duration-700 ease-out"
+              style={{
+                width: `${Math.max(180, progress * 6.5)}px`,
+                height: `${Math.max(180, progress * 6.5)}px`,
+                background: `radial-gradient(circle, rgba(124, 92, 255, ${0.10 + (progress / 100) * 0.20}) 0%, rgba(216, 195, 154, ${0.06 + (progress / 100) * 0.14}) 40%, transparent 70%)`,
+                filter: 'blur(45px)',
+                opacity: phase === 'dot' ? 0.35 : isDispersing ? 1.0 : 0.85,
+                transform: isDispersing
+                  ? 'translate(-50%, -50%) scale(2.2)'
+                  : 'translate(-50%, -50%) scale(1)',
+                transition: isDispersing
+                  ? 'transform 0.75s ease-out, opacity 0.75s ease-out'
+                  : 'all 0.5s ease-out',
+              }}
+            />
+
             {/* Initial Luminous Breathing Point (Phase 01: 0.0 - 0.5s) */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -263,7 +305,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 opacity: phase === 'dot' ? 1 : 0.4,
               }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="relative mb-6 flex items-center justify-center"
+              className="relative mb-6 flex items-center justify-center z-10"
             >
               <span className="w-2.5 h-2.5 rounded-full bg-[#F4F1EA] shadow-[0_0_16px_rgba(216,195,154,0.9)]" />
               <span className="absolute w-6 h-6 rounded-full bg-[#7C5CFF]/30 animate-ping pointer-events-none" />
@@ -278,12 +320,17 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </motion.div>
 
             {/* Section 04: Kishor SV Editorial Identity Reveal */}
-            <div className="relative overflow-hidden py-2 px-4">
+            <div className="relative overflow-hidden py-2 px-4 z-10">
               <motion.h1
-                initial={{ opacity: 0, filter: 'blur(20px)', y: 24 }}
+                initial={{ opacity: 0, filter: 'blur(24px)', y: 24 }}
                 animate={{
                   opacity: phase !== 'dot' ? 1 : 0,
-                  filter: phase !== 'dot' ? 'blur(0px)' : 'blur(20px)',
+                  filter:
+                    phase === 'dot'
+                      ? 'blur(24px)'
+                      : phase === 'identity'
+                      ? 'blur(6px)'
+                      : 'blur(0px)',
                   y: phase !== 'dot' ? 0 : 24,
                 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -292,13 +339,21 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 <span className="font-sans font-extrabold tracking-tighter mr-2 sm:mr-4">
                   KISHOR
                 </span>
-                <span className="font-display italic text-[#D8C39A] font-normal">
+                <span
+                  className={`font-display italic text-[#D8C39A] font-normal transition-opacity duration-700 ${
+                    phase === 'dot'
+                      ? 'opacity-0'
+                      : phase === 'identity'
+                      ? 'opacity-50'
+                      : 'opacity-100'
+                  }`}
+                >
                   SV
                 </span>
               </motion.h1>
 
               {/* Section 05: Thin Digital Scan Beam Sweeping Horizontally */}
-              {phase === 'scan' && (
+              {(phase === 'scan' || phase === 'structure') && (
                 <motion.div
                   initial={{ x: '-120%', opacity: 0 }}
                   animate={{ x: '180%', opacity: [0, 0.9, 0] }}
@@ -313,7 +368,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: phase !== 'dot' ? 1 : 0, y: phase !== 'dot' ? 0 : 8 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-[#92908B] mt-4 flex items-center gap-2"
+              className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-[#92908B] mt-4 flex items-center gap-2 z-10"
             >
               <span>AI/ML ENGINEER</span>
               <span className="w-1 h-1 rounded-full bg-[#7C5CFF]" />
@@ -321,8 +376,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </motion.p>
           </div>
 
-          {/* Bottom Area: Progress Counter, Rotating Status & Progress Bar */}
-          <div className="relative z-10 w-full flex flex-col gap-5 pt-4 border-t border-white/5">
+          {/* Bottom Area: Progress Counter, Rotating Status & Progress Bar (z-20) */}
+          <div className="relative z-20 w-full flex flex-col gap-5 pt-4 border-t border-white/5">
             {/* Status & Counter Row */}
             <div className="flex items-end justify-between">
               {/* Bottom Left: Rotating System Status */}
