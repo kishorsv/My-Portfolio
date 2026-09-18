@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { LoadingScreen } from './components/LoadingScreen';
-import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -69,9 +68,6 @@ export function App() {
     <div className="min-h-screen bg-[#0A0A0B] text-[#F4F1EA] selection:bg-[#7C5CFF]/30 selection:text-white relative overflow-x-hidden font-sans">
       {/* 44 — 2px Viewport Edge Scroll Progress Line */}
       <ScrollProgress />
-
-      {/* 16 — Desktop Custom Cursor with Spring Physics */}
-      <CustomCursor />
 
       {/* 09 — Subtle Film Grain (0.025 Opacity) */}
       <div className="film-grain-overlay pointer-events-none" />
