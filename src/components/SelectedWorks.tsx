@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { featuredProjects, type FeaturedProject } from '../data/projects';
+import { featuredProjects, allProjects, type FeaturedProject } from '../data/projects';
 import { SectionDivider } from './SectionDivider';
-import { ArrowUpRight, Globe, Terminal } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Globe, HeartPulse, Eye } from 'lucide-react';
 import { GithubIcon } from './icons';
 
 interface SelectedWorksProps {
@@ -38,6 +38,8 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
   const p4 = featuredProjects[3];
   const p5 = featuredProjects[4];
 
+  const additionalProjects = allProjects.slice(5);
+
   return (
     <section id="projects" className="bg-[#0A0A0B] py-28 md:py-40 relative overflow-hidden">
       {/* Section Divider */}
@@ -48,26 +50,19 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
             <span className="text-xs font-mono uppercase tracking-[0.3em] text-[#D8C39A] mb-3 block">
-              CASE STUDIES & PRODUCTION BUILDS
+              FEATURED ENGINEERING SYSTEMS
             </span>
             <h2 className="heading-clamp font-light tracking-tight text-[#F4F1EA]">
-              Featured <span className="font-display italic text-[#D8C39A]">works.</span>
+              Selected{' '}
+              <span className="font-display italic text-[#D8C39A]">
+                Works.
+              </span>
             </h2>
-            <p className="text-base text-[#92908B] max-w-lg mt-3 leading-relaxed font-light">
-              Each system engineered from foundational problems into living products with measurable impact.
-            </p>
           </div>
 
-          <a
-            href="https://github.com/kishorsv?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 hover:border-white/30 text-xs font-mono text-[#F4F1EA] transition-colors group self-start md:self-auto"
-            data-cursor="link"
-          >
-            <span>ALL REPOSITORIES</span>
-            <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+          <p className="max-w-md text-xs sm:text-sm font-mono text-[#92908B] leading-relaxed">
+            Every project represents a verified end-to-end system: problem research, interface design, AI engineering, testing, and production deployment.
+          </p>
         </div>
 
         {/* =========================================================
@@ -144,11 +139,25 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex items-center gap-2 text-xs font-mono text-[#F4F1EA] group-hover:text-[#D8C39A] transition-colors">
+                <div className="flex flex-wrap items-center gap-4">
+                  {p1.liveDemoUrl && (
+                    <a
+                      href={p1.liveDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full signature-gradient text-[#0A0A0B] text-xs font-mono font-semibold hover:opacity-95 transition-opacity"
+                    >
+                      <ExternalLink size={13} />
+                      <span>LIVE PROJECT</span>
+                    </a>
+                  )}
+
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#F4F1EA] group-hover:text-[#D8C39A] transition-colors">
                     <span>EXPLORE DEEP DIVE</span>
                     <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </span>
+
                   {p1.githubUrl && (
                     <a
                       href={p1.githubUrl}
@@ -164,10 +173,10 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                 </div>
               </div>
 
-              {/* Right Visual (Occupying ~75% of visual focus) */}
+              {/* Right Visual */}
               <div className="lg:col-span-7 relative">
                 <motion.div
-                  animate={{ scale: p1Hover ? 1.04 : 1 }}
+                  animate={{ scale: p1Hover ? 1.03 : 1 }}
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   className="rounded-2xl border border-white/15 bg-black/60 p-5 shadow-2xl overflow-hidden backdrop-blur-md"
                 >
@@ -175,26 +184,34 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                     <div className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#FF8066]/70" />
                       <span className="w-2.5 h-2.5 rounded-full bg-[#D8C39A]/70" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#A6D7B8]/70" />
-                      <span className="ml-2 text-[10px] text-white/50">multi_agent_graph_evaluator.py</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#6EE7B7]/70" />
+                      <span className="ml-2 text-[10px] text-white/50">career_os_agent_matrix.ts</span>
                     </div>
-                    <span className="text-[#A6D7B8] text-[10px]">? 50K NODES ACTIVE</span>
+                    <span className="text-[#7C5CFF]">AI EVALUATOR: ONLINE</span>
                   </div>
 
-                  {/* Simulated Code / Pipeline Matrix */}
-                  <div className="space-y-3 font-mono text-xs">
-                    <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-between">
-                      <span className="text-[#92908B]">Prerequisite Auditing:</span>
-                      <span className="text-[#D8C39A] font-semibold">Graph-Traversal Validated</span>
+                  {/* Simulated Metric Matrix */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                      <div className="text-[10px] font-mono text-[#92908B] uppercase">Goal Traversal</div>
+                      <div className="text-xl font-mono text-[#F4F1EA] font-semibold mt-1">Adaptive</div>
+                      <div className="text-[10px] text-[#D8C39A]">Milestone Sync</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-between">
-                      <span className="text-[#92908B]">Milestone Synthesis:</span>
-                      <span className="text-[#7C5CFF] font-semibold">Weekly Adaptive Cohort (80% faster)</span>
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                      <div className="text-[10px] font-mono text-[#92908B] uppercase">AI Mentor</div>
+                      <div className="text-xl font-mono text-[#7C5CFF] font-semibold mt-1">Active</div>
+                      <div className="text-[10px] text-[#7C5CFF]">Conversational</div>
                     </div>
-                    <div className="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-between">
-                      <span className="text-[#92908B]">Interview Feedback Engine:</span>
-                      <span className="text-[#A6D7B8] font-semibold">Deterministic Rubric Active</span>
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 col-span-2 sm:col-span-1">
+                      <div className="text-[10px] font-mono text-[#92908B] uppercase">Deployment</div>
+                      <div className="text-xl font-mono text-[#6EE7B7] font-semibold mt-1">Vercel</div>
+                      <div className="text-[10px] text-white/40">Production Edge</div>
                     </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-[#121214] border border-white/10 font-mono text-[11px] text-[#92908B] space-y-1">
+                    <div className="text-[#D8C39A]">&gt; aqenix-ai-career-operating-system.vercel.app</div>
+                    <div className="text-white/60">Evaluating candidate skill graph & roadmap velocity...</div>
                   </div>
                 </motion.div>
               </div>
@@ -203,10 +220,10 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
         </div>
 
         {/* =========================================================
-            PROJECT 02: AQENIX CHAT AI
+            PROJECT 02: HEALTH GUIDE AI
             Asymmetric: Image on right, text on left with thin vertical line.
             Metadata: 02, AI SYSTEM, CONVERSATIONAL.
-            Tiny violet accent. Radius: 24px.
+            Tiny teal accent. Radius: 24px.
         ========================================================= */}
         <div
           className="mb-24 perspective-1200 cursor-pointer"
@@ -223,13 +240,13 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
             animate={{ rotateX: p2Tilt.rx, rotateY: p2Tilt.ry }}
             transition={{ type: 'spring', damping: 22, stiffness: 220 }}
             className={`group relative rounded-[24px] overflow-hidden border p-8 sm:p-12 transition-all duration-700 bg-[#121214]/90 backdrop-blur-xl ${
-              p2Hover ? 'border-[#7C5CFF]/60 shadow-[0_24px_80px_rgba(124,92,255,0.15)]' : 'border-white/10'
+              p2Hover ? 'border-[#6EE7B7]/60 shadow-[0_24px_80px_rgba(110,231,183,0.15)]' : 'border-white/10'
             }`}
           >
             {/* Giant 02 */}
             <div
               className={`absolute right-8 -bottom-8 pointer-events-none select-none font-display italic text-[14rem] sm:text-[18rem] leading-none z-0 transition-opacity duration-700 ${
-                p2Hover ? 'opacity-10 text-[#7C5CFF]' : 'opacity-[0.035] text-white'
+                p2Hover ? 'opacity-10 text-[#6EE7B7]' : 'opacity-[0.035] text-white'
               }`}
             >
               02
@@ -238,19 +255,18 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Column with Thin Vertical Line */}
               <div className="lg:col-span-5 flex items-stretch gap-6">
-                {/* Thin vertical accent line */}
-                <div className="w-[2px] bg-gradient-to-b from-[#7C5CFF] via-white/20 to-transparent self-stretch flex-shrink-0" />
+                <div className="w-[2px] bg-gradient-to-b from-[#6EE7B7] via-white/20 to-transparent self-stretch flex-shrink-0" />
 
                 <div className="flex flex-col justify-center">
                   <div className="flex flex-col text-xs font-mono text-[#92908B] tracking-widest uppercase mb-3 space-y-1">
-                    <span className="text-[#7C5CFF] font-semibold">02 / CONVERSATIONAL AI</span>
-                    <span className="text-[11px] text-white/40">AI SYSTEM · REAL-TIME STREAMING</span>
+                    <span className="text-[#6EE7B7] font-semibold">02 / CONVERSATIONAL WELLNESS</span>
+                    <span className="text-[11px] text-white/40">{p2.category}</span>
                   </div>
 
                   <h3 className="text-3xl sm:text-4xl font-light text-[#F4F1EA] tracking-tight mb-4">
-                    AQENIX{' '}
-                    <span className="font-display italic text-[#F4F1EA]">
-                      Chat AI
+                    Health Guide{' '}
+                    <span className="font-display italic text-[#6EE7B7]">
+                      AI
                     </span>
                   </h3>
 
@@ -258,35 +274,51 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                     {p2.tagline}
                   </p>
 
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#D8C39A]">
-                    <span>SUB-40MS TTFT</span>
-                    <span>•</span>
-                    <span>ZERO LAYOUT SHIFT</span>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {p2.liveDemoUrl && (
+                      <a
+                        href={p2.liveDemoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#6EE7B7] text-[#0A0A0B] text-xs font-mono font-semibold hover:opacity-90 transition-opacity"
+                      >
+                        <ExternalLink size={13} />
+                        <span>LIVE PROJECT</span>
+                      </a>
+                    )}
+                    <span className="inline-flex items-center gap-1 text-xs font-mono text-[#D8C39A]">
+                      <span>DEEP DIVE</span>
+                      <ArrowUpRight size={13} />
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Visual: Streaming Terminal Fragment */}
+              {/* Right Visual: Conversational Engine Fragment */}
               <div className="lg:col-span-7">
-                <motion.div
-                  animate={{ scale: p2Hover ? 1.04 : 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="rounded-xl border border-white/10 bg-black/70 p-5 font-mono text-xs shadow-xl"
-                >
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-[11px] text-[#92908B]">
-                    <div className="flex items-center gap-2">
-                      <Terminal size={14} className="text-[#7C5CFF]" />
-                      <span>edge_stream_worker.ts</span>
-                    </div>
-                    <span className="text-[#A6D7B8]">38.2ms latency</span>
+                <div className="rounded-xl border border-white/10 bg-black/80 p-5 font-mono text-xs shadow-2xl">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10 text-[#92908B]">
+                    <span className="flex items-center gap-2">
+                      <HeartPulse size={14} className="text-[#6EE7B7]" />
+                      <span>health-guide-ai-66.lovable.app</span>
+                    </span>
+                    <span className="text-[10px] text-[#6EE7B7] bg-[#6EE7B7]/10 px-2 py-0.5 rounded border border-[#6EE7B7]/20">
+                      WELLNESS ENGINE
+                    </span>
                   </div>
-                  <pre className="text-xs text-[#F4F1EA]/90 leading-relaxed overflow-x-auto">
-                    <span className="text-[#7C5CFF]">const</span> stream = <span className="text-[#D8C39A]">await</span> edgeRuntime.hydrate(&#123;{'\n'}
-                    {'  '}memory: <span className="text-[#A6D7B8]">'hierarchical_compaction'</span>,{'\n'}
-                    {'  '}sandbox: <span className="text-[#A6D7B8]">'virtualized_execution'</span>,{'\n'}
-                    &#125;);
-                  </pre>
-                </motion.div>
+
+                  <div className="space-y-3">
+                    <div className="p-3 rounded-lg bg-white/5 border border-white/5 text-[#F4F1EA]/90">
+                      <div className="text-[10px] text-[#92908B] mb-1">USER QUERY:</div>
+                      "How can I maintain healthy posture and energy during long programming sprints?"
+                    </div>
+                    <div className="p-3 rounded-lg bg-[#6EE7B7]/5 border border-[#6EE7B7]/20 text-[#6EE7B7]">
+                      <div className="text-[10px] text-[#6EE7B7]/70 mb-1">AI HEALTH GUIDE:</div>
+                      "Integrate 20-20-20 visual pauses, 90° elbow ergonomic alignment, and hydration rhythm pacing. Structured wellness guardrails active."
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -327,7 +359,7 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
             <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
               <div className="max-w-xl">
                 <div className="flex items-center gap-3 text-xs font-mono text-[#D8C39A] tracking-widest uppercase mb-3">
-                  <span>03 / GEO-SPATIAL PLATFORM</span>
+                  <span>03 / GEO-SPATIAL CIVIC TECH</span>
                   <span>•</span>
                   <span>12° 58' N, 77° 35' E</span>
                 </div>
@@ -343,33 +375,55 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                   {p3.tagline}
                 </p>
 
-                <div className="flex flex-wrap gap-2 text-xs font-mono text-[#F4F1EA]/80">
-                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10">14,000+ DESKS INDEXED</span>
-                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10">65MS QUERY LATENCY</span>
-                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10">KANNADA + ENGLISH</span>
+                <div className="flex flex-wrap gap-2 text-xs font-mono text-[#F4F1EA]/80 mb-6">
+                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10">LEAFLET & OPENSTREETMAP</span>
+                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10">GOVERNMENT DESKS</span>
+                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10">INTERACTIVE ROUTING</span>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  {p3.liveDemoUrl && (
+                    <a
+                      href={p3.liveDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D8C39A] text-[#0A0A0B] text-xs font-mono font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      <ExternalLink size={13} />
+                      <span>LIVE PROJECT</span>
+                    </a>
+                  )}
+                  <span className="inline-flex items-center gap-1 text-xs font-mono text-[#F4F1EA] group-hover:text-[#D8C39A]">
+                    <span>EXPLORE DEEP DIVE</span>
+                    <ArrowUpRight size={14} />
+                  </span>
                 </div>
               </div>
 
               {/* Map grid visual cue */}
-              <div className="w-full lg:w-72 p-4 rounded-xl border border-white/10 bg-black/60 font-mono text-[11px] text-[#92908B] space-y-2">
+              <div className="w-full lg:w-80 p-5 rounded-2xl border border-white/10 bg-black/60 font-mono text-[11px] text-[#92908B] space-y-3">
                 <div className="flex items-center justify-between border-b border-white/10 pb-2">
                   <span className="flex items-center gap-1.5 text-[#D8C39A]">
                     <Globe size={13} />
-                    <span>SPATIAL DESK NODE</span>
+                    <span>SPATIAL CIVIC INDEX</span>
                   </span>
-                  <span>ONLINE PWA</span>
+                  <span className="text-[#6EE7B7]">ONLINE</span>
                 </div>
-                <div>Bengaluru Municipal Cluster</div>
-                <div className="text-[10px] text-white/40">Lat: 12.9716° | Lon: 77.5946°</div>
+                <div>government-office-finder.vercel.app</div>
+                <div className="text-[10px] text-white/40">Karnataka Municipal Clusters & Public Desks</div>
+                <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-[#D8C39A]">
+                  <span>PINPOINT VERIFIED</span>
+                  <span>MAP ENGINE READY</span>
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* =========================================================
-            PROJECT 04: LINGUABRIDGE
-            Human visual style, warm ivory typography, subtle coral accent.
-            Radius: 8px (Editorial).
+            PROJECT 04: POSTURE GUARDIAN AI
+            Radius: 24px (Editorial).
         ========================================================= */}
         <div
           className="mb-24 perspective-1200 cursor-pointer"
@@ -385,7 +439,7 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
           <motion.div
             animate={{ rotateX: p4Tilt.rx, rotateY: p4Tilt.ry }}
             transition={{ type: 'spring', damping: 22, stiffness: 220 }}
-            className={`group relative rounded-[8px] overflow-hidden border p-8 sm:p-12 transition-all duration-700 bg-[#121214]/90 backdrop-blur-xl ${
+            className={`group relative rounded-[24px] overflow-hidden border p-8 sm:p-12 transition-all duration-700 bg-[#121214]/90 backdrop-blur-xl ${
               p4Hover ? 'border-[#FF8066]/60 shadow-[0_24px_80px_rgba(255,128,102,0.15)]' : 'border-white/10'
             }`}
           >
@@ -401,15 +455,15 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-6">
                 <div className="flex items-center gap-3 text-xs font-mono text-[#FF8066] tracking-widest uppercase mb-3">
-                  <span>04 / INDIC NLP TRANSFORMER</span>
+                  <span>04 / COMPUTER VISION & AI</span>
                   <span>•</span>
-                  <span>HUMAN LANGUAGE</span>
+                  <span>REAL-TIME POSE</span>
                 </div>
 
                 <h3 className="text-3xl sm:text-4xl font-light text-[#F4F1EA] tracking-tight mb-3">
-                  Lingua{' '}
+                  Posture Guardian{' '}
                   <span className="font-display italic text-[#FF8066]">
-                    Bridge
+                    AI
                   </span>
                 </h3>
 
@@ -417,22 +471,45 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                   {p4.tagline}
                 </p>
 
-                <div className="text-xs font-mono text-[#FF8066] flex items-center gap-2">
-                  <span>+7.4 BLEU SCORE GAIN OVER GENERIC BASELINES</span>
+                <div className="flex flex-wrap items-center gap-4">
+                  {p4.liveDemoUrl && (
+                    <a
+                      href={p4.liveDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF8066] text-[#0A0A0B] text-xs font-mono font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      <ExternalLink size={13} />
+                      <span>LIVE PROJECT</span>
+                    </a>
+                  )}
+                  <span className="inline-flex items-center gap-1 text-xs font-mono text-[#F4F1EA] group-hover:text-[#FF8066]">
+                    <span>EXPLORE DEEP DIVE</span>
+                    <ArrowUpRight size={14} />
+                  </span>
                 </div>
               </div>
 
-              <div className="lg:col-span-6 p-6 rounded border border-[#FF8066]/20 bg-black/50 font-mono text-xs text-[#F4F1EA]">
-                <div className="text-[#92908B] text-[10px] uppercase tracking-widest mb-3">
-                  VERNACULAR DIALECT TRANSLITERATION MATRIX
+              <div className="lg:col-span-6 p-6 rounded-2xl border border-[#FF8066]/20 bg-black/50 font-mono text-xs text-[#F4F1EA]">
+                <div className="flex items-center justify-between text-[#92908B] text-[10px] uppercase tracking-widest mb-4">
+                  <span className="flex items-center gap-1.5 text-[#FF8066]">
+                    <Eye size={13} />
+                    <span>ON-DEVICE VISION MATRIX</span>
+                  </span>
+                  <span>100% PRIVATE WASM</span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-white/5">
-                  <span className="text-[#F4F1EA]">????? ???? (Regional Source)</span>
-                  <span className="text-[#FF8066]">Phonetic Aligned</span>
+                  <span className="text-[#F4F1EA]">Cervical Spine Angle</span>
+                  <span className="text-[#6EE7B7]">Optimal (~14°)</span>
                 </div>
-                <div className="flex items-center justify-between py-2">
-                  <span className="text-[#D8C39A]">Preserved Idiomatic English</span>
-                  <span className="text-[#A6D7B8]">High Fidelity</span>
+                <div className="flex items-center justify-between py-2 border-b border-white/5">
+                  <span className="text-[#F4F1EA]">Shoulder Horizontal Plane</span>
+                  <span className="text-[#D8C39A]">Balanced</span>
+                </div>
+                <div className="flex items-center justify-between py-2 text-[10px] text-white/40">
+                  <span>posture-guardian-ai.vercel.app</span>
+                  <span>Edge AI Feedback</span>
                 </div>
               </div>
             </div>
@@ -440,7 +517,7 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
         </div>
 
         {/* =========================================================
-            PROJECT 05: LIFEOS
+            PROJECT 05: AQENIX FIT AI
             Dark immersive composition, floating UI fragments, OS feel,
             subtle violet glow. Radius: 36px.
         ========================================================= */}
@@ -474,15 +551,15 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-5">
                 <div className="flex items-center gap-3 text-xs font-mono text-[#7C5CFF] tracking-widest uppercase mb-3">
-                  <span>05 / LOCAL OPERATING SYSTEM</span>
+                  <span>05 / FITNESS INTELLIGENCE</span>
                   <span>•</span>
-                  <span>SYSTEM ENVIRONMENT</span>
+                  <span>AI ASSISTANT</span>
                 </div>
 
                 <h3 className="text-3xl sm:text-4xl font-light text-[#F4F1EA] tracking-tight mb-3">
-                  Life{' '}
+                  AQENIX{' '}
                   <span className="font-display italic text-[#7C5CFF]">
-                    OS
+                    Fit AI
                   </span>
                 </h3>
 
@@ -490,29 +567,117 @@ export function SelectedWorks({ onSelectProject }: SelectedWorksProps) {
                   {p5.tagline}
                 </p>
 
-                <div className="flex items-center gap-2 text-xs font-mono text-[#A6D7B8]">
-                  <span>100% LOCAL-FIRST</span>
-                  <span>•</span>
-                  <span>0MS INPUT LATENCY</span>
+                <div className="flex flex-wrap items-center gap-4">
+                  {p5.liveDemoUrl && (
+                    <a
+                      href={p5.liveDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full signature-gradient text-[#0A0A0B] text-xs font-mono font-semibold hover:opacity-95 transition-opacity"
+                    >
+                      <ExternalLink size={13} />
+                      <span>LIVE PROJECT</span>
+                    </a>
+                  )}
+                  <span className="inline-flex items-center gap-1 text-xs font-mono text-[#D8C39A]">
+                    <span>EXPLORE DEEP DIVE</span>
+                    <ArrowUpRight size={14} />
+                  </span>
                 </div>
               </div>
 
-              {/* Floating UI fragments for OS feel */}
+              {/* Right Visual */}
               <div className="lg:col-span-7 grid grid-cols-2 gap-4">
                 <div className="p-4 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md">
-                  <div className="text-[10px] font-mono text-[#7C5CFF] uppercase mb-1">Circadian Block</div>
-                  <div className="text-xl font-mono text-[#F4F1EA]">01:45:00</div>
-                  <div className="text-[10px] text-[#92908B]">Deep Engineering Sprint</div>
+                  <div className="text-[10px] font-mono text-[#7C5CFF] uppercase mb-1">Adaptive Workout</div>
+                  <div className="text-xl font-mono text-[#F4F1EA]">Dynamic AI</div>
+                  <div className="text-[10px] text-[#92908B]">Personalized Sprints</div>
                 </div>
 
                 <div className="p-4 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md">
-                  <div className="text-[10px] font-mono text-[#D8C39A] uppercase mb-1">Thought Graph</div>
-                  <div className="text-xl font-mono text-[#F4F1EA]">142 Nodes</div>
-                  <div className="text-[10px] text-[#92908B]">Bidirectional Markdown</div>
+                  <div className="text-[10px] font-mono text-[#D8C39A] uppercase mb-1">Nutrition Tracker</div>
+                  <div className="text-xl font-mono text-[#F4F1EA]">Smart Guidance</div>
+                  <div className="text-[10px] text-[#92908B]">Progress Calibration</div>
                 </div>
               </div>
             </div>
           </motion.div>
+        </div>
+
+        {/* =========================================================
+            ADDITIONAL PROJECTS & CONCEPTS DIRECTORY
+        ========================================================= */}
+        <div className="mt-20 pt-16 border-t border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#7C5CFF] mb-1 block">
+                EXPANDED PORTFOLIO
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-light text-[#F4F1EA]">
+                More Projects &{' '}
+                <span className="font-display italic text-[#D8C39A]">Concepts</span>
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-[#92908B]">
+              CLICK ANY ITEM FOR DEEP DIVE / LIVE LAUNCH
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {additionalProjects.map((proj) => (
+              <div
+                key={proj.id}
+                onClick={() => onSelectProject(proj)}
+                className="group p-6 rounded-3xl border border-white/10 bg-[#121214]/60 hover:bg-[#121214] hover:border-white/25 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs font-mono text-[#92908B] mb-4">
+                    <span className="text-[#D8C39A] font-medium">{proj.number}</span>
+                    <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                      {proj.badge}
+                    </span>
+                  </div>
+
+                  <h4 className="text-lg font-medium text-[#F4F1EA] mb-2 group-hover:text-[#D8C39A] transition-colors">
+                    {proj.name}
+                  </h4>
+
+                  <p className="text-xs text-[#92908B] leading-relaxed mb-4">
+                    {proj.tagline}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                  <div className="flex gap-1.5 flex-wrap">
+                    {proj.tech.slice(0, 2).map((t) => (
+                      <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/70">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {proj.liveDemoUrl ? (
+                    <a
+                      href={proj.liveDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-[#6EE7B7] hover:underline flex items-center gap-1"
+                    >
+                      <span>Launch</span>
+                      <ExternalLink size={12} />
+                    </a>
+                  ) : (
+                    <span className="text-[#7C5CFF] flex items-center gap-1">
+                      <span>Concept</span>
+                      <ArrowUpRight size={12} />
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

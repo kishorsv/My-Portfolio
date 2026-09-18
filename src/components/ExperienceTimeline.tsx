@@ -11,22 +11,28 @@ interface TimelineNode {
 
 const TIMELINE_NODES: TimelineNode[] = [
   {
-    year: '2024',
-    phase: 'FOUNDATIONS',
-    focus: 'Data Structures & Algorithms · C++ / Python',
-    details: 'Groundwork in algorithmic problem-solving, computational logic, systems architecture, and core object-oriented programming.',
+    year: 'PHASE 01',
+    phase: 'AI/ML & GENAI',
+    focus: 'Generative AI · AI APIs · Prompt Engineering',
+    details: 'Immersive exploration of Generative AI, LLM orchestration, Google Skills Boost, Kaggle machine learning certifications, and intelligent conversational architectures.',
   },
   {
-    year: '2025',
-    phase: 'WEB + PYTHON',
-    focus: 'Full-Stack Systems · React · Async Backends',
-    details: 'Building production web applications with React, TypeScript, FastAPI, relational modeling, and real-time client communication.',
+    year: 'PHASE 02',
+    phase: 'PYTHON & DSA',
+    focus: 'Advanced Python · Algorithmic Rigor · DSA',
+    details: 'Deep mathematical foundations, time/space complexity optimization, data structures, and algorithmic logic solving real computational bottlenecks.',
   },
   {
-    year: '2026',
-    phase: 'AI + GENAI',
-    focus: 'Generative Models · Multi-Agent Workflows · RAG',
-    details: 'Specializing in autonomous agent orchestration, vector embeddings, local LLM inference runtimes, and dependable AI products.',
+    year: 'PHASE 03',
+    phase: 'FULL-STACK & UI/UX',
+    focus: 'React · Tailwind · Node.js · Responsive UX',
+    details: 'Mastery through NxtWave CCBP 4.0 Academy, component design systems, modern CSS Flexbox, REST APIs, MongoDB, SQL, and tactile user interface engineering.',
+  },
+  {
+    year: 'CURRENT',
+    phase: 'PRODUCTION BUILDS',
+    focus: 'Vercel Deployments · 10+ Projects · Systems',
+    details: 'Shipping real-world software from concept to deployment: AQENIX Career OS, Health Guide AI, CivicFind India, Posture Guardian AI, and AQENIX Fit AI.',
     isCurrent: true,
   },
 ];
@@ -52,7 +58,7 @@ export function ExperienceTimeline() {
           {/* Thin Horizontal Connecting Line */}
           <div className="hidden md:block absolute top-[52px] left-0 right-0 h-[1px] bg-gradient-to-r from-white/10 via-white/20 to-white/10 z-0" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
             {TIMELINE_NODES.map((node, idx) => (
               <motion.div
                 key={node.year}

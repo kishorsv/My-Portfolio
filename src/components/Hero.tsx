@@ -125,14 +125,14 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
       <div className="hero-fade-in relative z-10 w-full max-w-7xl mx-auto flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.25em] text-[#92908B] border-b border-white/5 pb-4 mb-4">
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[#7C5CFF]" />
-          <span className="text-[#F4F1EA] font-semibold">KSV®</span>
-          <span className="hidden sm:inline-block text-[#92908B]/60">/ DIGITAL PORTFOLIO</span>
+          <span className="text-[#F4F1EA] font-semibold">KS</span>
+          <span className="hidden sm:inline-block text-[#92908B]/60">/ MRIT · 2ND YEAR B.E.</span>
         </div>
 
         <div className="flex items-center gap-3">
-          <span>BENGALURU</span>
+          <span>SHANKANAHALLI</span>
           <span className="w-1 h-1 rounded-full bg-[#92908B]/40" />
-          <span>INDIA</span>
+          <span>KARNATAKA</span>
           <span className="w-1 h-1 rounded-full bg-[#92908B]/40" />
           <span className="text-[#D8C39A]">2026</span>
         </div>
@@ -160,27 +160,27 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
           {/* Identity Tag in IBM Plex Mono */}
           <div className="hero-fade-in inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono tracking-[0.2em] text-[#7C5CFF] uppercase backdrop-blur-md mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#7C5CFF] animate-pulse" />
-            <span>AI / FULL-STACK</span>
+            <span>AI/ML ENGINEER & FULL-STACK DEVELOPER</span>
           </div>
 
           {/* Section 12 — Hero Main Statement: Mixed Typography Moment */}
           <div className="hero-fade-in max-w-2xl mb-8">
             <p className="text-2xl sm:text-3xl md:text-4xl text-[#F4F1EA] font-light leading-[1.25] tracking-tight">
-              <span>I BUILD </span>
+              <span>FROM CONCEPT → DESIGN → </span>
               <span className="font-display italic text-[#D8C39A] font-normal text-[1.12em] px-1">
-                intelligent
+                intelligence
               </span>
-              <span> digital experiences.</span>
+              <span> → WORKING PRODUCT.</span>
             </p>
 
             <p className="text-sm sm:text-base text-[#92908B] font-light mt-3 leading-relaxed">
-              AI, interfaces, and full-stack systems — turned from ideas into working products.
+              I am Kishor SV, an engineering student focused on Artificial Intelligence, Machine Learning, Generative AI, and Full-Stack Development. I enjoy transforming ideas into working digital products.
             </p>
           </div>
 
           {/* Section 13 — Masked Vertical Role Animation */}
           <div className="hero-fade-in flex items-center gap-3 text-xs font-mono uppercase tracking-[0.2em] text-[#92908B] mb-10">
-            <span>CURRENTLY EXPLORING</span>
+            <span>CURRENT FOCUS</span>
             <span className="w-8 h-px bg-white/15" />
             <div className="h-7 overflow-hidden relative inline-flex items-center">
               <AnimatePresence mode="wait">
@@ -201,7 +201,7 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
           {/* Section 14 — Hero CTAs */}
           <div className="hero-fade-in flex flex-wrap items-center gap-4">
             <MagneticButton onClick={onExploreWork} variant="primary">
-              <span>EXPLORE MY WORK ?</span>
+              <span>EXPLORE MY WORK ↗</span>
             </MagneticButton>
 
             <MagneticButton
@@ -229,7 +229,7 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
               <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden bg-[#0A0A0B]">
                 <img
                   src="/kishor.jpg"
-                  alt="Kishor SV — AI/ML Engineer · Full-Stack Developer"
+                  alt="Kishor SV — AI/ML Engineer & Full-Stack Developer"
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03] filter contrast-[1.04] brightness-[0.98]"
                   loading="eager"
                 />
@@ -239,12 +239,12 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
 
                 {/* Top Right Tag */}
                 <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/65 border border-white/10 backdrop-blur-md text-[10px] font-mono tracking-widest text-[#D8C39A] uppercase">
-                  AI / ML ENGINEER
+                  AI/ML · FULL-STACK
                 </div>
 
                 {/* Top Left Coordinates */}
                 <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md text-[9px] font-mono tracking-wider text-[#92908B] uppercase">
-                  12° 58' N, 77° 35' E
+                  12° 18' N, 76° 39' E
                 </div>
 
                 {/* Bottom Status Pill */}
@@ -256,7 +256,7 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
                     </span>
                   </div>
                   <span className="text-[#92908B] text-[10px] uppercase font-mono">
-                    2026
+                    MRIT · 2026
                   </span>
                 </div>
               </div>

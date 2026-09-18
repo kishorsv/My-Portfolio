@@ -13,7 +13,10 @@ export function Footer() {
               KISHOR SV
             </h4>
             <p className="text-[11px] font-mono text-[#92908B] uppercase tracking-widest mt-1">
-              AI / FULL-STACK
+              AI/ML ENGINEER & FULL-STACK DEVELOPER
+            </p>
+            <p className="text-[10px] font-mono text-white/40 uppercase tracking-wider mt-0.5">
+              MRIT · 2ND YEAR B.E. (AI-FOCUSED)
             </p>
           </div>
 
@@ -37,17 +40,20 @@ export function Footer() {
             ))}
           </div>
 
-          {/* Right: City & Year */}
+          {/* Right: Location & Year */}
           <div className="text-left md:text-right font-mono text-xs text-[#92908B] tracking-widest uppercase">
-            <div>BENGALURU</div>
+            <div>SHANKANAHALLI, KARNATAKA</div>
             <div className="text-[#D8C39A] mt-0.5">2026</div>
           </div>
         </div>
 
         {/* Bottom Line: Copyright */}
         <div className="pt-8 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-[#92908B]/60 tracking-widest uppercase">
-          <div>© 2026 KISHOR SV</div>
-          <div>CRAFTED WITH PRECISION</div>
+          <div>© 2026 KISHOR SV · ALL RIGHTS RESERVED</div>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#6EE7B7]" />
+            <span>SYSTEM ONLINE</span>
+          </div>
         </div>
       </div>
     </footer>
