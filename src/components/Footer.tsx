@@ -40,9 +40,15 @@ export function Footer() {
             ))}
           </div>
 
-          {/* Right: Location & Year */}
+          {/* Right: Location, Phone & Year */}
           <div className="text-left md:text-right font-mono text-xs text-[#92908B] tracking-widest uppercase">
             <div>BENGALURU, KARNATAKA</div>
+            <a
+              href="tel:9686084891"
+              className="text-[#F4F1EA]/80 hover:text-[#D8C39A] transition-colors block mt-1 tracking-wider normal-case"
+            >
+              +91 9686084891
+            </a>
             <div className="text-[#D8C39A] mt-0.5">2026</div>
           </div>
         </div>

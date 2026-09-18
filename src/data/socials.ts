@@ -14,6 +14,8 @@ export const personalInfo = {
   degree: 'B.E. — Artificial Intelligence (2nd Year)',
   eyebrow: 'DIGITAL PORTFOLIO 2026',
   email: 'kishukishorsv123@gmail.com',
+  phone: '+91 9686084891',
+  phoneRaw: '9686084891',
   heroStatement: 'FROM CONCEPT → DESIGN → INTELLIGENCE → WORKING PRODUCT',
   secondaryStatement:
     'I am Kishor SV, an engineering student focused on Artificial Intelligence, Machine Learning, Generative AI, and Full-Stack Development. I enjoy transforming ideas into working digital products.',

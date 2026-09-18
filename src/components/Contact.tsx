@@ -2,21 +2,28 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useHLSVideo } from '../hooks/useHLSVideo';
 import { personalInfo } from '../data/socials';
-import { Mail, Copy, Check } from 'lucide-react';
+import { Mail, Phone, Copy, Check } from 'lucide-react';
 
 const HLS_SOURCE = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
 export function Contact() {
   const videoRef = useHLSVideo({ src: HLS_SOURCE });
   const circleButtonRef = useRef<HTMLDivElement | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
   const [isBtnHovered, setIsBtnHovered] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(personalInfo.phoneRaw || '9686084891');
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const handleMouseMoveBtn = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -111,19 +118,51 @@ export function Contact() {
           </a>
         </motion.div>
 
-        {/* Quick Email Copy Action */}
-        <div className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md">
-          <Mail size={14} className="text-[#D8C39A]" />
-          <span className="font-mono text-xs sm:text-sm text-[#F4F1EA]/90 tracking-wide">
-            {personalInfo.email}
-          </span>
-          <button
-            onClick={handleCopyEmail}
-            className="p-1 rounded text-[#92908B] hover:text-white transition-colors"
-            aria-label="Copy email address"
-          >
-            {copied ? <Check size={14} className="text-[#A6D7B8]" /> : <Copy size={14} />}
-          </button>
+        {/* Quick Action Contact Chips */}
+        <div className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto">
+          {/* Email Chip */}
+          <div className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md">
+            <Mail size={14} className="text-[#D8C39A]" />
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="font-mono text-xs sm:text-sm text-[#F4F1EA]/90 hover:text-[#D8C39A] tracking-wide transition-colors"
+            >
+              {personalInfo.email}
+            </a>
+            <button
+              onClick={handleCopyEmail}
+              className="p-1 rounded text-[#92908B] hover:text-white transition-colors ml-1"
+              aria-label="Copy email address"
+            >
+              {copiedEmail ? <Check size={14} className="text-[#6EE7B7]" /> : <Copy size={14} />}
+            </button>
+          </div>
+
+          {/* Phone / WhatsApp Chip */}
+          <div className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md">
+            <Phone size={14} className="text-[#7C5CFF]" />
+            <a
+              href={`tel:${personalInfo.phoneRaw || '9686084891'}`}
+              className="font-mono text-xs sm:text-sm text-[#F4F1EA]/90 hover:text-[#7C5CFF] tracking-wide transition-colors"
+            >
+              {personalInfo.phone || '+91 9686084891'}
+            </a>
+            <button
+              onClick={handleCopyPhone}
+              className="p-1 rounded text-[#92908B] hover:text-white transition-colors ml-1"
+              aria-label="Copy phone number"
+            >
+              {copiedPhone ? <Check size={14} className="text-[#6EE7B7]" /> : <Copy size={14} />}
+            </button>
+            <a
+              href={`https://wa.me/91${personalInfo.phoneRaw || '9686084891'}?text=Hi%20Kishor%2C%20saw%20your%20portfolio`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2.5 py-0.5 rounded-full bg-[#6EE7B7]/15 border border-[#6EE7B7]/30 text-[10px] font-mono text-[#6EE7B7] hover:bg-[#6EE7B7]/25 transition-colors"
+            >
+              WhatsApp ↗
+            </a>
+          </div>
         </div>
       </div>
     </section>
