@@ -44,6 +44,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
     mouseRef.current.targetY = e.clientY / window.innerHeight;
   }, []);
 
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
   // Choreographed Progress Counter (00 -> 100 over ~3.0 seconds)
   useEffect(() => {
     const startTime = performance.now();
@@ -85,20 +87,19 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         setPhase('complete');
 
         // 100% Convergence Moment: Brief pause, central flare, then explosive smoke dispersal
-        const completeTimeout = setTimeout(() => {
+        const t1 = setTimeout(() => {
           setIsDispersing(true);
           setPhase('exit');
+          setIsFinished(true);
 
-          // Cinematic transformation into main portfolio hero
-          const exitTimeout = setTimeout(() => {
-            setIsFinished(true);
+          // Safety fallback in case onExitComplete is delayed or skipped
+          const t2 = setTimeout(() => {
             onComplete();
-          }, 750);
-
-          return () => clearTimeout(exitTimeout);
+          }, 850);
+          timeoutsRef.current.push(t2);
         }, 380);
 
-        return () => clearTimeout(completeTimeout);
+        timeoutsRef.current.push(t1);
       }
     };
 
@@ -106,6 +107,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
     return () => {
       if (progressAnimRef.current) cancelAnimationFrame(progressAnimRef.current);
+      timeoutsRef.current.forEach((timeoutId) => clearTimeout(timeoutId));
+      timeoutsRef.current = [];
     };
   }, [onComplete]);
 
@@ -218,16 +221,15 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const paddedCount = String(progress).padStart(2, '0');
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={onComplete}>
       {!isFinished && (
         <motion.div
           key="loader-overlay"
           initial={{ opacity: 1 }}
           exit={{
-            clipPath: 'circle(150% at 50% 50%)',
             opacity: 0,
-            scale: 1.03,
-            filter: 'blur(8px)',
+            scale: 1.04,
+            filter: 'blur(10px)',
             transition: { duration: 0.75, ease: [0.77, 0, 0.175, 1] },
           }}
           className="fixed inset-0 z-[9999] flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-[#0A0A0B] text-[#F4F1EA] select-none overflow-hidden"
