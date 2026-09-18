@@ -13,7 +13,7 @@ export const engineeringJourney: JourneyMilestone[] = [
     stage: 'Academic Milestone',
     title: 'B.E. — Artificial Intelligence (2nd Year)',
     description:
-      'Pursuing an AI-focused engineering degree at Mysore Royal Institute of Technology (MRIT). From roots in Shankanahalli village, Karnataka, channeling intense curiosity into engineering disciplined AI and web architectures.',
+      'Pursuing an AI-focused engineering degree at Mysore Royal Institute of Technology (MRIT). Based in Bengaluru, Karnataka, channeling intense curiosity into engineering disciplined AI and web architectures.',
     skills: ['AI / ML', 'Python', 'DSA', 'Algorithms', 'Discrete Math'],
     highlight: 'Balancing rigorous engineering academics with intensive evening production builds and open source.',
   },

@@ -8,8 +8,8 @@ export const personalInfo = {
   name: 'KISHOR SV',
   shortName: 'KS',
   primaryRole: 'AI/ML ENGINEER & FULL-STACK DEVELOPER',
-  location: 'SHANKANAHALLI, KARNATAKA, INDIA',
-  origin: 'Shankanahalli village, Karnataka, India',
+  location: 'BENGALURU, KARNATAKA, INDIA',
+  origin: 'Bengaluru, Karnataka, India',
   college: 'Mysore Royal Institute of Technology (MRIT)',
   degree: 'B.E. — Artificial Intelligence (2nd Year)',
   eyebrow: 'DIGITAL PORTFOLIO 2026',
@@ -28,7 +28,7 @@ export const personalInfo = {
   aboutMe: {
     status: '2nd-Year Engineering Student (AI-focused)',
     college: 'Mysore Royal Institute of Technology (MRIT)',
-    origin: 'Shankanahalli village, Karnataka, India',
+    origin: 'Bengaluru, Karnataka, India',
     focus: 'Artificial Intelligence, Generative AI & Full-Stack Development',
     genAiPassion:
       'Passionate about Generative AI, LLM applications, autonomous agents, prompt engineering, and building real-world AI software that solves human friction.',

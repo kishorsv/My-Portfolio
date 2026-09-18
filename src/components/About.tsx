@@ -7,7 +7,7 @@ export function About() {
     {
       num: '01',
       title: 'Engineering Rigor & Foundations',
-      desc: '2nd-year B.E. student focused on Artificial Intelligence at Mysore Royal Institute of Technology (MRIT). Roots in Shankanahalli village, Karnataka, instilling an enduring work ethic and obsession with practical systems building.',
+      desc: '2nd-year B.E. student focused on Artificial Intelligence at Mysore Royal Institute of Technology (MRIT). Based in Bengaluru, Karnataka, instilling an enduring work ethic and obsession with practical systems building.',
       badge: 'MRIT · 2nd Year B.E.',
     },
     {
@@ -57,7 +57,7 @@ export function About() {
           </h2>
 
           <p className="mt-10 text-base sm:text-lg md:text-xl text-[#92908B] max-w-3xl font-light leading-relaxed">
-            I am <span className="text-[#F4F1EA] font-medium">Kishor SV</span>, an engineering student at <span className="text-[#D8C39A]">Mysore Royal Institute of Technology (MRIT)</span> with roots in <span className="text-[#F4F1EA]">Shankanahalli village, Karnataka</span>. I enjoy transforming ideas into working digital products — from understanding a problem and designing the UI/UX to developing the application, integrating AI, testing, and deploying the final product.
+            I am <span className="text-[#F4F1EA] font-medium">Kishor SV</span>, an engineering student at <span className="text-[#D8C39A]">Mysore Royal Institute of Technology (MRIT)</span> based in <span className="text-[#F4F1EA]">Bengaluru, Karnataka</span>. I enjoy transforming ideas into working digital products — from understanding a problem and designing the UI/UX to developing the application, integrating AI, testing, and deploying the final product.
           </p>
 
           {/* Editorial Author Byline */}
@@ -76,7 +76,7 @@ export function About() {
                 <span>MRIT · 2nd Year B.E. (AI-Focused)</span>
                 <span>·</span>
                 <MapPin size={12} className="text-[#D8C39A]" />
-                <span>Shankanahalli, Karnataka, India</span>
+                <span>Bengaluru, Karnataka, India</span>
               </div>
             </div>
           </div>

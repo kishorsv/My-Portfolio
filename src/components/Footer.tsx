@@ -42,7 +42,7 @@ export function Footer() {
 
           {/* Right: Location & Year */}
           <div className="text-left md:text-right font-mono text-xs text-[#92908B] tracking-widest uppercase">
-            <div>SHANKANAHALLI, KARNATAKA</div>
+            <div>BENGALURU, KARNATAKA</div>
             <div className="text-[#D8C39A] mt-0.5">2026</div>
           </div>
         </div>

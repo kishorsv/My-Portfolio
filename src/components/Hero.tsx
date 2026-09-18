@@ -130,7 +130,7 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
         </div>
 
         <div className="flex items-center gap-3">
-          <span>SHANKANAHALLI</span>
+          <span>BENGALURU</span>
           <span className="w-1 h-1 rounded-full bg-[#92908B]/40" />
           <span>KARNATAKA</span>
           <span className="w-1 h-1 rounded-full bg-[#92908B]/40" />
@@ -244,7 +244,7 @@ export function Hero({ onExploreWork, onAbout }: HeroProps) {
 
                 {/* Top Left Coordinates */}
                 <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md text-[9px] font-mono tracking-wider text-[#92908B] uppercase">
-                  12° 18' N, 76° 39' E
+                  12° 58' N, 77° 35' E
                 </div>
 
                 {/* Bottom Status Pill */}
